@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="depositAccount">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入账金额:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMm-1s-EQY">
+                    <rect key="frame" x="20" y="40" width="57" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="asO-B9-1Wm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入要存入的金额:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Oy-Mj-PIF">
+                    <rect key="frame" x="97" y="35" width="258" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Pn2-i1-mWH"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="amI-LG-3YP">
+                    <rect key="frame" x="0.0" y="95" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="wNs-wn-mhz"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMP-Wf-Id0">
+                    <rect key="frame" x="93.5" y="196" width="188" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="8Qt-Ac-43p"/>
+                        <constraint firstAttribute="width" constant="188" id="jU9-Xa-2eA"/>
+                    </constraints>
+                    <state key="normal" title="提交存入" backgroundImage="提交订单">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="1Oy-Mj-PIF" firstAttribute="leading" secondItem="DMm-1s-EQY" secondAttribute="trailing" constant="20" id="LbR-eA-6yc"/>
+                <constraint firstItem="amI-LG-3YP" firstAttribute="top" secondItem="1Oy-Mj-PIF" secondAttribute="bottom" constant="30" id="Pkg-lN-hU5"/>
+                <constraint firstAttribute="trailing" secondItem="1Oy-Mj-PIF" secondAttribute="trailing" constant="20" id="Yp4-Hc-qCm"/>
+                <constraint firstItem="amI-LG-3YP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="blI-xY-cQA"/>
+                <constraint firstItem="hMP-Wf-Id0" firstAttribute="top" secondItem="amI-LG-3YP" secondAttribute="bottom" constant="100" id="dyk-J2-fdF"/>
+                <constraint firstItem="1Oy-Mj-PIF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="35" id="e7O-Qh-wHa"/>
+                <constraint firstItem="DMm-1s-EQY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="kQg-KX-aHG"/>
+                <constraint firstAttribute="trailing" secondItem="amI-LG-3YP" secondAttribute="trailing" id="mDv-ba-knF"/>
+                <constraint firstItem="DMm-1s-EQY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="40" id="oUR-dX-s60"/>
+                <constraint firstItem="hMP-Wf-Id0" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xWl-0h-VYV"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="33.5" y="90.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="提交订单" width="80" height="40"/>
+    </resources>
+</document>

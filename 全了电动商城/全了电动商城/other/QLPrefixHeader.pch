@@ -1,0 +1,31 @@
+//
+//  QLPrefixHeader.pch
+//  全了电动商城
+//
+//  Created by 懒洋洋 on 2016/12/23.
+//  Copyright © 2016年 亮点网络. All rights reserved.
+//
+
+#ifndef QLPrefixHeader_pch
+#define QLPrefixHeader_pch
+
+#import "Masonry.h"
+#import <AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "Singleton.h"
+#import "QLPrefix.h"
+#import "ProgressHUD.h"
+#import "UIViewController+MMDrawerController.h"
+#import "ShopCarAnimationViewController.h"
+#import "MMDrawerBarButtonItem.h"
+#import "UIScrollView+Refresh.h"
+#import "LDUserInfo.h"
+#import "BXHttpManager.h"
+#import "GlobalVariables.h"
+#import "SSJKitImageManager.h"
+#import "MD5Str.h"
+#import "WXApi.h"
+//创建折叠式表格的类
+#import "YUFoldingTableView.h"
+#import <AlipaySDK/AlipaySDK.h>
+#endif

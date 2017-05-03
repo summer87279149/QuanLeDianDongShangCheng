@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="myCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="未标题-1" translatesAutoresizingMaskIntoConstraints="NO" id="Byv-Ma-c1w">
+                        <rect key="frame" x="20" y="8" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="XHR-Ci-kZs"/>
+                            <constraint firstAttribute="height" constant="20" id="i4N-Sa-xMv"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="个人信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2BH-Sg-QPe">
+                        <rect key="frame" x="6" y="31" width="49.5" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Kik-ag-MKa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Byv-Ma-c1w" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="NDx-5f-OuT"/>
+                <constraint firstAttribute="bottom" secondItem="2BH-Sg-QPe" secondAttribute="bottom" constant="8" id="ah3-4n-Daq"/>
+                <constraint firstItem="2BH-Sg-QPe" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="dkp-oc-vgB"/>
+                <constraint firstItem="Byv-Ma-c1w" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="xSQ-Vq-cPe"/>
+            </constraints>
+            <size key="customSize" width="204" height="136"/>
+            <connections>
+                <outlet property="myImage" destination="Byv-Ma-c1w" id="SHx-yX-d6X"/>
+                <outlet property="myLabel" destination="2BH-Sg-QPe" id="YgI-RU-dhy"/>
+            </connections>
+            <point key="canvasLocation" x="-21" y="-59"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="未标题-1" width="30" height="30"/>
+    </resources>
+</document>

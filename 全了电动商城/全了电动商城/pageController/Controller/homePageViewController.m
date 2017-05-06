@@ -5,7 +5,7 @@
 //  Created by 懒洋洋 on 2016/12/23.
 //  Copyright © 2016年 亮点网络. All rights reserved.
 //
-
+#import "loginViewController.h"
 #import "homePageViewController.h"
 #import "headlineView.h"
 #import "LYYScrollView.h"
@@ -84,13 +84,13 @@ static NSString *registert = @"cell";
 }
 
 #pragma mark - NSNotification
-//tabbar上面数字加1的动画显示
+//tabbar上面数字加1的动画显示，周洋写的，我删了
 - (void)shopCarBadgeValueAdd:(NSNotification *)notification {
     
-    UIViewController *vc = self.tabBarController.viewControllers[3];
-    NSInteger badgeValue = [vc.tabBarItem.badgeValue integerValue];
-    badgeValue += 1;
-    vc.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld", (long)badgeValue];
+//    UIViewController *vc = self.tabBarController.viewControllers[3];
+//    NSInteger badgeValue = [vc.tabBarItem.badgeValue integerValue];
+//    badgeValue += 1;
+//    vc.tabBarItem.badgeValue = [NSString stringWithFormat:@"%ld", (long)badgeValue];
     
 }
 - (void)dealloc {
@@ -216,9 +216,46 @@ static NSString *registert = @"cell";
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     NSLog(@"%@",indexPath);
     HomePageCollectionViewCell *cell = (HomePageCollectionViewCell *)[self.homePagecollection cellForItemAtIndexPath:indexPath];
+    NSString* userid;
+    //判断登入
+    [[LDUserInfo sharedLDUserInfo] readUserInfo];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *isLogin = [user objectForKey:@"isLogin"];
+    if ([isLogin intValue] == 0) {
+        if ([LDUserInfo sharedLDUserInfo].isLogin == YES) {
+            //读取本地数据 获取用户ID
+            [[LDUserInfo sharedLDUserInfo] readUserInfo];
+            userid = [LDUserInfo sharedLDUserInfo].ID ;
+            
+        } else {
+            //如果没登录就跳转
+            loginViewController *vc = [loginViewController new] ;
+            vc.type = 1;
+            [self.navigationController pushViewController:vc animated:YES];
+            return;
+        }
+    }else if ([isLogin intValue] != 0) {
+        userid = [user objectForKey:@"userID"];
+    }
+    NSDictionary *para = @{@"uid":userid,
+                           @"cpid":cell.ID,
+                           @"chutype":@"2",
+                           @"num":@"1"};
+    [ProgressHUD show];
+    [QLRequest submitOrder:para success:^(id response) {
+        [ProgressHUD dismiss];
+//        NSLog(@"打印一下返回:%@",response);
+        if (!([response[@"code"] integerValue]==97100)) {
+            [ProgressHUD showError:@"加入购物车失败"];
+        }
+    } error:^(id response) {
+        [ProgressHUD dismiss];
+        [ProgressHUD showError:@"加入购物车失败"];
+    }];
     
+    //下面是周洋写的，别动它
     GoodsIDs = [NSMutableDictionary dictionary];
-    /** 点击的商品ID 🐔 状态 */
+    /** 点击的商品ID  状态 */
     [GoodsIDs setValue:@"1" forKey:@"jionNum"];
     [GoodsIDs setValue:@"1" forKey:@"status"];
     [GoodsIDs setValue:cell.ID forKey:@"goodsID"];

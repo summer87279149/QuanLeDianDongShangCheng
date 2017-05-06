@@ -75,7 +75,7 @@
     NSString *urlStr = [NSString stringWithFormat:@"http://myadmin.all-360.com:8080/Admin/AppApi/sureOrder/orderid/%@",_orderNum];
     [session GET:urlStr parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        LDLog(@"%@",responseObject);
+        NSLog(@"111111%@",responseObject);
         _allMoney = responseObject[@"data"][@"total"];
         _allJiFen = responseObject[@"data"][@"jifen"];
         _WeiChartPay = responseObject[@"data"][@"WX"];
@@ -90,7 +90,6 @@
         LDLog(@"%@",_allMoney);
         [self getOrderData];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        LDLog(@"error = %@",error);
     }];
 }
 //返回订单信息  需要提交给支付接口
@@ -102,6 +101,7 @@
     NSString *urlStr = [NSString stringWithFormat:@"http://myadmin.all-360.com:8080/Admin/AppApi/wxPay/orderid/%@/total/%@/jifen/%@",_orderNum,_allMoney,_allJiFen];
     [session GET:urlStr parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        _payBtn.enabled = YES;
         LDLog(@"%@",responseObject);
         _appid = responseObject[@"data"][@"appid"];
         _partnerid = responseObject[@"data"][@"partnerid"];
@@ -166,7 +166,7 @@
     [self.view addSubview:orderDataView];
     
     _orderData = [[UILabel alloc]initWithFrame:CGRectMake(20, 10, SCREEN_WIDTH - 20, 18)];
-    _orderData.text = @"订单号:  洗刷刷牌牙刷公司";
+    _orderData.text = @"订单号:  ";
     _orderData.font = [UIFont systemFontOfSize:13];
     _orderData.textColor = [UIColor grayColor];
     [orderDataView addSubview:_orderData];
@@ -201,7 +201,7 @@
     /** 微信支付 */
     _weiXinView = [UIView new];
     _weiXinView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:_weiXinView];
+//    [self.view addSubview:_weiXinView];
     
     UIImageView *weiImage = [[UIImageView alloc]initWithFrame:CGRectMake(20, 13, 150, 40)];
     weiImage.image = [UIImage imageNamed:@"WePayLogo"];
@@ -254,16 +254,16 @@
     }];
     
     [ZFBView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_weiXinView.mas_bottom).offset(5);
+        make.top.mas_equalTo(payExplainView.mas_bottom).offset(5);
         make.left.mas_equalTo(0);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 70));
     }];
-    
+    _payStatus = 2;
     
     /** 余额支付 */
     UIView *yuEView = [UIView new];
     yuEView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:yuEView];
+//    [self.view addSubview:yuEView];
     
     UIImageView *yuEImage = [[UIImageView alloc]initWithFrame:CGRectMake(20, 13, 150, 40)];
     yuEImage.image = [UIImage imageNamed:@"余额支付"];
@@ -291,13 +291,14 @@
 #pragma mark ----- 底部支付
 - (void)setBottomView {
     _payBtn = [UIButton new];
+    _payBtn.enabled = NO;
     [_payBtn setTitle:@"确认支付" forState:UIControlStateNormal];
     [_payBtn setBackgroundImage:[UIImage imageNamed:@"提交订单"] forState:UIControlStateNormal];
     [_payBtn addTarget:self action:@selector(setPayBtn) forControlEvents:UIControlEventTouchUpInside];
     _payBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.view addSubview:_payBtn];
     [_payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-40);
+        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-60);
         make.left.mas_equalTo(80);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH-160, 40));
     }];

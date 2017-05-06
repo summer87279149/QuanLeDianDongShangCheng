@@ -60,9 +60,14 @@
 }
 
 - (void)setDealBack {
-   // [self.navigationController popViewControllerAnimated:YES];
-    [self.storyboard instantiateViewControllerWithIdentifier:@"Main"];
-    self.tabBarController.selectedIndex = 0;
+//
+    if(self.type==1){
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        [self.storyboard instantiateViewControllerWithIdentifier:@"Main"];
+        self.tabBarController.selectedIndex = 0;
+    }
+    
 }
 #pragma mark ----- setLoginViewController
 - (void)setLoginViewController {

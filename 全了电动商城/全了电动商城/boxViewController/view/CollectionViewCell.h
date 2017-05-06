@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "goodsDataModel.h"
 typedef void(^deleteBlock)(UIButton *btn , goodsDataModel *model);
+typedef void(^jianBlock)(UIButton *btn , goodsDataModel *model);
+typedef void(^jiaBlock)(UIButton *btn , goodsDataModel *model);
 @interface CollectionViewCell : UICollectionViewCell
 /** 商品图片 */
 @property (weak, nonatomic) IBOutlet UIImageView *shopImage;
@@ -25,6 +27,8 @@ typedef void(^deleteBlock)(UIButton *btn , goodsDataModel *model);
 
 
 @property (nonatomic , copy)deleteBlock block;
+@property (nonatomic , copy)jianBlock jianBlock;
+@property (nonatomic , copy)jiaBlock jiaBlock;
 //显示总价和积分够约束线改变
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *AllMoneytopLine;
 //

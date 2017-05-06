@@ -10,14 +10,18 @@
 
 @interface goodsDataModel : NSObject
 
-/** 商品的ID */
+/** 购物车id */
 @property (nonatomic , strong)NSString *ID;
+//产品id，商品id
+@property (nonatomic , strong)NSString *cpid;
 /** 商品名称 */
 @property (nonatomic , strong)NSString *name;
 /** 第一次 在加入清单里用户选择的 商品的数量 */
 @property (nonatomic , strong)NSString *shopsNum;
 /** 全价 */
 @property (nonatomic , strong)NSString *zhigoujia;
+//总价,和上面那个应该是一样的，我猜是这样
+@property (nonatomic, strong) NSString *totalPrice;
 /** 夺宝单价 */
 @property (nonatomic , strong)NSString *danjia;
 /** 总需 */

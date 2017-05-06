@@ -15,6 +15,11 @@
 		181EFD7D1E67E62F00FDA7E9 /* DBSourceDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181EFD7B1E67E62F00FDA7E9 /* DBSourceDataModel.m */; };
 		181EFD801E67E6AD00FDA7E9 /* DBShowDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 181EFD7F1E67E6AD00FDA7E9 /* DBShowDetailViewController.m */; };
 		181EFD831E67F48400FDA7E9 /* LDSeystemInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 181EFD821E67F48400FDA7E9 /* LDSeystemInfoModel.m */; };
+		84810D511EBAFB5800914527 /* XTRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84810D501EBAFB5800914527 /* XTRequestManager.m */; };
+		84810D581EBAFC3300914527 /* BaseRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84810D571EBAFC3300914527 /* BaseRequestManager.m */; };
+		84810D5B1EBAFC4700914527 /* QLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84810D5A1EBAFC4700914527 /* QLRequest.m */; };
+		84810D601EBB084000914527 /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 84810D5D1EBB084000914527 /* NSArray+Log.m */; };
+		84810D611EBB084000914527 /* NSDictionary+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 84810D5F1EBB084000914527 /* NSDictionary+Log.m */; };
 		BE51894DDC1329026E8C560C /* libPods-全了电动商城.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2638B051A0D57D9C9F169CED /* libPods-全了电动商城.a */; };
 		F5116B4B1E89F7E00008F57F /* homePageTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5116B491E89F7E00008F57F /* homePageTopCell.m */; };
 		F5116B4C1E89F7E00008F57F /* homePageTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5116B4A1E89F7E00008F57F /* homePageTopCell.xib */; };
@@ -195,6 +200,16 @@
 		2638B051A0D57D9C9F169CED /* libPods-全了电动商城.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-全了电动商城.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33B4F62D8BEBA816143016B0 /* Pods-全了电动商城.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-全了电动商城.release.xcconfig"; path = "Pods/Target Support Files/Pods-全了电动商城/Pods-全了电动商城.release.xcconfig"; sourceTree = "<group>"; };
 		4DDD1773DA40A3837C7BBF00 /* Pods-全了电动商城.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-全了电动商城.debug.xcconfig"; path = "Pods/Target Support Files/Pods-全了电动商城/Pods-全了电动商城.debug.xcconfig"; sourceTree = "<group>"; };
+		84810D4F1EBAFB5800914527 /* XTRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTRequestManager.h; sourceTree = "<group>"; };
+		84810D501EBAFB5800914527 /* XTRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTRequestManager.m; sourceTree = "<group>"; };
+		84810D561EBAFC3300914527 /* BaseRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequestManager.h; sourceTree = "<group>"; };
+		84810D571EBAFC3300914527 /* BaseRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequestManager.m; sourceTree = "<group>"; };
+		84810D591EBAFC4700914527 /* QLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLRequest.h; sourceTree = "<group>"; };
+		84810D5A1EBAFC4700914527 /* QLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QLRequest.m; sourceTree = "<group>"; };
+		84810D5C1EBB084000914527 /* NSArray+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Log.h"; sourceTree = "<group>"; };
+		84810D5D1EBB084000914527 /* NSArray+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Log.m"; sourceTree = "<group>"; };
+		84810D5E1EBB084000914527 /* NSDictionary+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Log.h"; sourceTree = "<group>"; };
+		84810D5F1EBB084000914527 /* NSDictionary+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Log.m"; sourceTree = "<group>"; };
 		F5116B481E89F7E00008F57F /* homePageTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = homePageTopCell.h; sourceTree = "<group>"; };
 		F5116B491E89F7E00008F57F /* homePageTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = homePageTopCell.m; sourceTree = "<group>"; };
 		F5116B4A1E89F7E00008F57F /* homePageTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = homePageTopCell.xib; sourceTree = "<group>"; };
@@ -514,6 +529,26 @@
 				33B4F62D8BEBA816143016B0 /* Pods-全了电动商城.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		84810D4E1EBAFB5800914527 /* XTHTTPRequestManager */ = {
+			isa = PBXGroup;
+			children = (
+				84810D4F1EBAFB5800914527 /* XTRequestManager.h */,
+				84810D501EBAFB5800914527 /* XTRequestManager.m */,
+			);
+			path = XTHTTPRequestManager;
+			sourceTree = "<group>";
+		};
+		84810D521EBAFBDD00914527 /* QLRequest */ = {
+			isa = PBXGroup;
+			children = (
+				84810D561EBAFC3300914527 /* BaseRequestManager.h */,
+				84810D571EBAFC3300914527 /* BaseRequestManager.m */,
+				84810D591EBAFC4700914527 /* QLRequest.h */,
+				84810D5A1EBAFC4700914527 /* QLRequest.m */,
+			);
+			name = QLRequest;
 			sourceTree = "<group>";
 		};
 		CAA018DF067495E263AE3355 /* Frameworks */ = {
@@ -1762,9 +1797,15 @@
 		F5DA51C91E0CF4AD0073DB0D /* other */ = {
 			isa = PBXGroup;
 			children = (
+				84810D521EBAFBDD00914527 /* QLRequest */,
+				84810D4E1EBAFB5800914527 /* XTHTTPRequestManager */,
 				F5DED5421E63D61300DE84AE /* httpRequestManager */,
 				F55B80161E08BD6A004CDE3F /* AppDelegate.h */,
 				F55B80171E08BD6A004CDE3F /* AppDelegate.m */,
+				84810D5C1EBB084000914527 /* NSArray+Log.h */,
+				84810D5D1EBB084000914527 /* NSArray+Log.m */,
+				84810D5E1EBB084000914527 /* NSDictionary+Log.h */,
+				84810D5F1EBB084000914527 /* NSDictionary+Log.m */,
 				F5DA51CA1E0CF5130073DB0D /* QLPrefixHeader.pch */,
 				F5DA51CB1E0CF64E0073DB0D /* Singleton.h */,
 				F5DA51CE1E0CF7040073DB0D /* QLPrefix.h */,
@@ -2099,6 +2140,7 @@
 				F52A7D451E25CF110084D2FF /* payListViewController.m in Sources */,
 				F5EBB3501E7697240032A97B /* cityModel.m in Sources */,
 				F52A7DEA1E2CA5F50084D2FF /* adressTableViewCell.m in Sources */,
+				84810D611EBB084000914527 /* NSDictionary+Log.m in Sources */,
 				F5DA51D21E0D0C230073DB0D /* LYYScrollView.m in Sources */,
 				F59134261E558DE000A76E1B /* pageGoodsModel.m in Sources */,
 				181EFD771E67E58300FDA7E9 /* YUFoldingTableView.m in Sources */,
@@ -2117,14 +2159,17 @@
 				F5D772961E14F3A60017D06A /* boxViewController.m in Sources */,
 				F5D772721E14A9730017D06A /* ProductDetailsViewController.m in Sources */,
 				F5339DF01E57DC170065ADD2 /* commodityModel.m in Sources */,
+				84810D5B1EBAFC4700914527 /* QLRequest.m in Sources */,
 				F5A0D00E1E1E403600261E49 /* commodityDetailedViewController.m in Sources */,
 				F5BBCBF51E1626FC000C5011 /* myCollectionViewCell.m in Sources */,
 				F52A7E2E1E2DF2FE0084D2FF /* registerViewController.m in Sources */,
+				84810D581EBAFC3300914527 /* BaseRequestManager.m in Sources */,
 				F59134601E55A11200A76E1B /* CoreRefreshView.m in Sources */,
 				F52A7DBC1E2C74BD0084D2FF /* allPriceViewController.m in Sources */,
 				F5428DE61EAB3FE00059EB85 /* depositAccount.m in Sources */,
 				F5BE658E1E6EC75C001221BA /* orderReadModel.m in Sources */,
 				F5DA51D61E0D0D720073DB0D /* HomePageCollectionViewCell.m in Sources */,
+				84810D601EBB084000914527 /* NSArray+Log.m in Sources */,
 				F59134571E55A11200A76E1B /* CAAnimation+CoreRefresh.m in Sources */,
 				F52A7DB51E2C726C0084D2FF /* LuckViewController.m in Sources */,
 				F5BE653B1E6E3AB2001221BA /* intergralModel.m in Sources */,
@@ -2134,6 +2179,7 @@
 				F548F5C01E987DF1008A82BA /* redTableViewCell.m in Sources */,
 				F5A16D8C1E138A5D00ED4DAA /* WinningViewController.m in Sources */,
 				F5BBCBEF1E15F5CB000C5011 /* myTopView.m in Sources */,
+				84810D511EBAFB5800914527 /* XTRequestManager.m in Sources */,
 				F5428DD31EAAF6A30059EB85 /* shareTopView.m in Sources */,
 				F5BE654D1E6E7D30001221BA /* DuoBaoModel.m in Sources */,
 				F52A7E2B1E2CD9D00084D2FF /* loginViewController.m in Sources */,

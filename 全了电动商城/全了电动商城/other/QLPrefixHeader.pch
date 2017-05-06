@@ -26,6 +26,10 @@
 #import "MD5Str.h"
 #import "WXApi.h"
 //创建折叠式表格的类
+#import "NSArray+Log.h"
+#import "NSDictionary+Log.h"
+#import "XTRequestManager.h"
+#import "QLRequest.h"
 #import "YUFoldingTableView.h"
 #import <AlipaySDK/AlipaySDK.h>
 #endif

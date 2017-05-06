@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface loginViewController : UIViewController
-
+@property (nonatomic, assign) int type;//标识符:1代表本页面由push而来，否则不管。
 @end

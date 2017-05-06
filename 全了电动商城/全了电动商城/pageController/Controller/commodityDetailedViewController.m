@@ -5,7 +5,7 @@
 //  Created by 懒洋洋 on 2017/1/5.
 //  Copyright © 2017年 亮点网络. All rights reserved.
 //
-
+#import "loginViewController.h"
 #import "commodityDetailedViewController.h"
 #import "LYYScrollView.h"
 #import "commodityHeadView.h"
@@ -302,119 +302,50 @@ static NSString *reuseIndentifier = @"cell";
     number = _surplusNum;
     
 }
-#pragma mark ----- 2个按钮 -> 立即参与 -> 加入清单 4个按钮 2个方法
-//夺宝参与2个按钮
+#pragma mark ------> 立即参与 、 加入清单
+//众筹价立即购买
 - (void)gotoListViewController {
-#pragma mark ------ 要记住这种方法 及如何获取storyboard
-    //创建抽屉 重写抽屉功能 否则抽屉无用
-    sideslipViewController *sideslip = [[sideslipViewController alloc]init];
-    /**
-     主视图 ---> 左侧 ---> 右侧
-     */
-    UIStoryboard *boadr = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UITabBarController *tabbarController = [boadr instantiateViewControllerWithIdentifier:@"tabbar"];
-    tabbarController.tabBar.tintColor = kColor_RGB(215, 59, 100);
-    tabbarController.tabBar.backgroundColor = [UIColor whiteColor];
-    tabbarController.tabBar.barTintColor = [UIColor whiteColor];
-    MMDrawerController *drawerController = [[MMDrawerController alloc]initWithCenterViewController:tabbarController leftDrawerViewController:sideslip rightDrawerViewController:nil];
-    //4、设置打开/关闭抽屉的手势
-    drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
-    drawerController.closeDrawerGestureModeMask =MMCloseDrawerGestureModeAll;
-    //5、设置左右两边抽屉显示的多少
-    drawerController.maximumLeftDrawerWidth = 200.0;
-    drawerController.maximumRightDrawerWidth = 200.0;
-    [[UIApplication sharedApplication].delegate window].rootViewController = drawerController;
-    tabbarController.selectedIndex = 3;
-    
-    /** 传商品ID */
-    GoodsIDs = [NSMutableDictionary dictionary];
-    /** 点击的商品ID 🐔 状态 */
-    NSString *numberText = [NSString stringWithFormat:@"%d",number];
-    [GoodsIDs setValue:numberText forKey:@"jionNum"];
-    [GoodsIDs setValue:@"1" forKey:@"status"];
-    NSString *IDStr = [NSString stringWithFormat:@"%@",_identifying];
-    [GoodsIDs setValue:IDStr forKey:@"goodsID"];
-    [ShopsIDs addObject:GoodsIDs];
-    LDLog(@"%@",GoodsIDs);
-    LDLog(@"%@",ShopsIDs);
-
-    
+    [self reWriteChouTi];
+    NSString *numStr = [NSString stringWithFormat:@"%d",number];
+    [self addCar:@"2" num:numStr];
 }
-//加入清单
+//众筹价加入购物车
 - (void)SetJoinListBtn {
-    /** 储存ID */
-    /** 传商品ID */
-    GoodsIDs = [NSMutableDictionary dictionary];
-    /** 点击的商品ID 🐔 状态 */
-    NSString *numberText = [NSString stringWithFormat:@"%d",number];
-    [GoodsIDs setValue:numberText forKey:@"jionNum"];
-    [GoodsIDs setValue:@"1" forKey:@"status"];
-    NSString *IDStr = [NSString stringWithFormat:@"%@",_identifying];
-    [GoodsIDs setValue:IDStr forKey:@"goodsID"];
-    [ShopsIDs addObject:GoodsIDs];
-    LDLog(@"%@",GoodsIDs);
-    LDLog(@"%@",ShopsIDs);
-    [self addProductsAnimation:nil dropToPoint:CGPointMake(self.view.bounds.size.width -50, self.view.layer.bounds.size.height - 40) isNeedNotification:YES];
-    [ProgressHUD showSuccess:@"成功加入购物车"];
+    NSString *numStr = [NSString stringWithFormat:@"%d",number];
+    [self addCar:@"2" num:numStr];
 }
-//全价直购两个按钮
+//全价直购立即购买
 - (void)gotoAllViewController {
-    //创建抽屉 重写抽屉功能 否则抽屉无用
-    sideslipViewController *sideslip = [[sideslipViewController alloc]init];
-    /**
-     主视图 ---> 左侧 ---> 右侧
-     */
-    UIStoryboard *boadr = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UITabBarController *tabbarController = [boadr instantiateViewControllerWithIdentifier:@"tabbar"];
-    tabbarController.tabBar.tintColor = kColor_RGB(215, 59, 100);
-    tabbarController.tabBar.backgroundColor = [UIColor whiteColor];
-    tabbarController.tabBar.barTintColor = [UIColor whiteColor];
-    MMDrawerController *drawerController = [[MMDrawerController alloc]initWithCenterViewController:tabbarController leftDrawerViewController:sideslip rightDrawerViewController:nil];
-    //4、设置打开/关闭抽屉的手势
-    drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
-    drawerController.closeDrawerGestureModeMask =MMCloseDrawerGestureModeAll;
-    //5、设置左右两边抽屉显示的多少
-    drawerController.maximumLeftDrawerWidth = 200.0;
-    drawerController.maximumRightDrawerWidth = 200.0;
-    [[UIApplication sharedApplication].delegate window].rootViewController = drawerController;
-    tabbarController.selectedIndex = 3;
-    
-    /** 传商品ID */
-    GoodsIDs = [NSMutableDictionary dictionary];
-    /** 点击的商品ID 🐔 状态 */
-    NSString *numberText = [NSString stringWithFormat:@"1"];
-    [GoodsIDs setValue:numberText forKey:@"jionNum"];
-    [GoodsIDs setValue:@"2" forKey:@"status"];
-    NSString *IDStr = [NSString stringWithFormat:@"%@",_identifying];
-    [GoodsIDs setValue:IDStr forKey:@"goodsID"];
-    [ShopsIDs addObject:GoodsIDs];
-    LDLog(@"%@",GoodsIDs);
-    LDLog(@"%@",ShopsIDs);
+    [self reWriteChouTi];
+    [self addCar:@"1" num:@"1"];
 }
+//全价直购加入购物车
 - (void)SetAllListBtn {
-    /** 传商品ID */
-    GoodsIDs = [NSMutableDictionary dictionary];
-    /** 点击的商品ID 🐔 状态 */
-    NSString *numberText = [NSString stringWithFormat:@"1"];
-    [GoodsIDs setValue:numberText forKey:@"jionNum"];
-    [GoodsIDs setValue:@"2" forKey:@"status"];
-    NSString *IDStr = [NSString stringWithFormat:@"%@",_identifying];
-    [GoodsIDs setValue:IDStr forKey:@"goodsID"];
-    [ShopsIDs addObject:GoodsIDs];
-    LDLog(@"%@",GoodsIDs);
-    LDLog(@"%@",ShopsIDs);
-    
-    [self addProductsAnimation:nil dropToPoint:CGPointMake(self.view.bounds.size.width -50, self.view.layer.bounds.size.height - 40) isNeedNotification:YES];
-    [ProgressHUD showSuccess:@"成功加入购物车"];
+    [self addCar:@"1" num:@"1"];
 }
-//积分购 2个按钮
+//积分购立即购买
 - (void)gotoIntegralViewController {
     if ([self.jiFenStr intValue] == 0) {
         [ProgressHUD showError:@"占未开启积分"];
         _TopheadView.jionBoxTwo.userInteractionEnabled = NO;
         _TopheadView.jionBoxNowTwo.userInteractionEnabled = NO;
     } else {
-    //创建抽屉 重写抽屉功能 否则抽屉无用
+        [self reWriteChouTi];
+        [self addCar:@"3" num:@"1"];
+    }
+}
+//积分购加入购物车
+- (void)SetIntegralListBtn {
+    if ([self.jiFenStr intValue] == 0) {
+        [ProgressHUD showError:@"占未开启积分"];
+        _TopheadView.jionBoxTwo.userInteractionEnabled = NO;
+        _TopheadView.jionBoxNowTwo.userInteractionEnabled = NO;
+    } else {
+        [self addCar:@"3" num:@"1"];
+    }
+}
+//创建抽屉 重写抽屉功能 否则抽屉无用
+-(void)reWriteChouTi{
     sideslipViewController *sideslip = [[sideslipViewController alloc]init];
     /**
      主视图 ---> 左侧 ---> 右侧
@@ -433,40 +364,42 @@ static NSString *reuseIndentifier = @"cell";
     drawerController.maximumRightDrawerWidth = 200.0;
     [[UIApplication sharedApplication].delegate window].rootViewController = drawerController;
     tabbarController.selectedIndex = 3;
-    
-    /** 传商品ID */
-    GoodsIDs = [NSMutableDictionary dictionary];
-    /** 点击的商品ID 🐔 状态 */
-    NSString *numberText = [NSString stringWithFormat:@"1"];
-    [GoodsIDs setValue:numberText forKey:@"jionNum"];
-    [GoodsIDs setValue:@"3" forKey:@"status"];
-    NSString *IDStr = [NSString stringWithFormat:@"%@",_identifying];
-    [GoodsIDs setValue:IDStr forKey:@"goodsID"];
-    [ShopsIDs addObject:GoodsIDs];
-    LDLog(@"%@",GoodsIDs);
-    LDLog(@"%@",ShopsIDs);
-    }
 }
-- (void)SetIntegralListBtn {
-    if ([self.jiFenStr intValue] == 0) {
-        [ProgressHUD showError:@"占未开启积分"];
-        _TopheadView.jionBoxTwo.userInteractionEnabled = NO;
-        _TopheadView.jionBoxNowTwo.userInteractionEnabled = NO;
-    } else {
-    /** 传商品ID */
-    GoodsIDs = [NSMutableDictionary dictionary];
-    /** 点击的商品ID 🐔 状态 */
-    NSString *numberText = [NSString stringWithFormat:@"1"];
-    [GoodsIDs setValue:numberText forKey:@"jionNum"];
-    [GoodsIDs setValue:@"3" forKey:@"status"];
-    NSString *IDStr = [NSString stringWithFormat:@"%@",_identifying];
-    [GoodsIDs setValue:IDStr forKey:@"goodsID"];
-    [ShopsIDs addObject:GoodsIDs];
-    LDLog(@"%@",GoodsIDs);
-    LDLog(@"%@",ShopsIDs);
-    [self addProductsAnimation:nil dropToPoint:CGPointMake(self.view.bounds.size.width -50, self.view.layer.bounds.size.height - 40) isNeedNotification:YES];
-    [ProgressHUD showSuccess:@"成功加入购物车"];
+-(void)addCar:(NSString*)typeString num:(NSString*)num{
+    ///加入购物车
+    NSString* userid;
+    [[LDUserInfo sharedLDUserInfo] readUserInfo];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *isLogin = [user objectForKey:@"isLogin"];
+    if ([isLogin intValue] == 0) {
+        if ([LDUserInfo sharedLDUserInfo].isLogin == YES) {
+            userid = [LDUserInfo sharedLDUserInfo].ID ;
+        } else {
+            //如果没登录就跳转
+            loginViewController *vc = [loginViewController new] ;
+            vc.type = 1;
+            [self.navigationController pushViewController:vc animated:YES];
+            return;
+        }
+    }else if ([isLogin intValue] != 0) {
+        userid = [user objectForKey:@"userID"];
     }
+    NSDictionary *para = @{@"uid":userid,
+                           @"cpid":_identifying,
+                           @"chutype":typeString,
+                           @"num":num};
+    [ProgressHUD show];
+    [QLRequest submitOrder:para success:^(id response) {
+        [ProgressHUD dismiss];
+        NSLog(@"打印一下返回:%@",response);
+        if (!([response[@"code"] integerValue]==97100)) {
+            [ProgressHUD showError:@"加入购物车失败"];
+        }
+    } error:^(id response) {
+        [ProgressHUD dismiss];
+        [ProgressHUD showError:@"加入购物车失败"];
+    }];
+    
 }
 #pragma mark ------ 请求数据上半区的数据
 - (void)loadData {
@@ -495,29 +428,13 @@ static NSString *reuseIndentifier = @"cell";
         #pragma mark ------重点<正则表达式> 滚动视图的切割字符串 代做吧
         //正则表达式 待研究 剖析
         NSRegularExpression *re = [NSRegularExpression regularExpressionWithPattern:@"\"/[0-9a-zA-Z, \\., /, _]+\"" options:NSRegularExpressionAnchorsMatchLines error:NULL];
-        
         [re enumerateMatchesInString:_imagesUrl options:0 range:NSMakeRange(0, _imagesUrl.length) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
             NSString *matchStr = [_imagesUrl substringWithRange:result.range];
             NSString *matchString = [matchStr substringFromIndex:1];
             NSString *str = [ImageUrl stringByAppendingString:matchString];
             str =  [str stringByReplacingOccurrencesOfString:@"\"" withString:@""];
             [self.imagesArray addObject:str];
-            
         }];
-        LDLog(@"%@",self.imagesArray);
-        
-        /* 上面的解析
-         insert code to handle array
-         
-         NSString *待解析语句 = @"语句";
-         
-         NSRegularExpression *匹配模式 = [NSRegularExpression regularExpressionWithPattern:@"\"/[0-9a-zA-Z, \\.]\"" options:0 error:NULL];
-         NSMutableArray *解析结果数组 = [NSMutableArray array];
-         [匹配模式 enumerateMatchesInString:待解析语句 options:0 range:NSMakeRange(0, 0) usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
-         NSString * 解析结果 = [待解析语句 substringWithRange:result.range];
-         [解析结果数组 addObject:解析结果];
-         }];
-         */
         [self setHeadTabelView];
         [self.tabelView reloadData];
         LDLog(@"加载商品详情成功");

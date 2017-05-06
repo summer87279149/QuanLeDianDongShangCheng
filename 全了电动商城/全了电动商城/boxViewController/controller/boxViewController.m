@@ -5,13 +5,16 @@
 //  Created by 懒洋洋 on 2016/12/29.
 //  Copyright © 2016年 亮点网络. All rights reserved.
 //
-
+#import "payListViewController.h"
+#import "loginViewController.h"
 #import "boxViewController.h"
 #import "CollectionViewCell.h"
 #import "ClearingViewController.h"
 #import "goodsDataModel.h"
 @interface boxViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
-
+{
+    NSString*level;//保存用户级别
+}
 @property (nonatomic , strong)UIView *nilView;
 @property (nonatomic , strong)UIImageView *nilImageView;
 @property (nonatomic , strong)UICollectionView *boxCollection;
@@ -46,11 +49,11 @@ static NSString *reuseIdentifier = @"cell";
     [super viewDidLoad];
     self.view.backgroundColor = kColor_RGB(241, 238, 238);
     [self setFootView];
-    [self setNilView];
-    [self setBoxCollectionView];
+    
     [self configNavigation];
-   
-
+    [self setBoxCollectionView];
+    
+    
 }
 
 #pragma mark - 创建导航栏
@@ -64,40 +67,13 @@ static NSString *reuseIdentifier = @"cell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;
-    self.navigationController.tabBarItem.badgeValue = nil;
-    if (ShopsIDs.count == 0) {
-        self.nilView.hidden = NO;
-        self.boxCollection.hidden = YES;
-    }else {
-        self.nilView.hidden = YES;
-        self.boxCollection.hidden = NO;
-    }
-    //加载数据
-    [self loadCellDatas];
-    LDLog(@"%@",ShopsIDs);
+    [self request];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    //视图将要小时的时候  删除所有数据  否则一直增加  原因  控制没释放
-    [self.dataModelArray removeAllObjects];
-
 }
 
-#pragma mark ----- 如果为空 显示空视图
-- (void)setNilView {
-    _nilView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    _nilView.backgroundColor = kColor_RGB(241, 238, 238);
-    [self.view addSubview:_nilView];
-    _nilImageView = [UIImageView new];
-    _nilImageView.image = [UIImage imageNamed:@"空箱子"];
-    [_nilView addSubview:_nilImageView];
-    [_nilImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(100);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 400));
-        make.left.mas_equalTo(0);
-    }];
-}
+
 #pragma mark ----- setNilView
 - (void)setFootView {
     _footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
@@ -110,13 +86,11 @@ static NSString *reuseIdentifier = @"cell";
     [_footView addSubview:_bottonNumber];
     
     _bottomLabel = [UILabel new];
-    _bottomLabel.text = [NSString stringWithFormat:@"共参与%lu件商品",(unsigned long)ShopsIDs.count];
+    _bottomLabel.text = @"总价:";
     _bottomLabel.textColor = [UIColor grayColor];
     _bottomLabel.font = [UIFont systemFontOfSize:13];
     [_footView addSubview:_bottomLabel];
     
-    
-
     _orderBtn = [UIButton new];
     [_orderBtn setTitle:@"提交订单" forState:UIControlStateNormal];
     [_orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -136,10 +110,52 @@ static NSString *reuseIdentifier = @"cell";
         make.size.mas_equalTo(CGSizeMake(80, 40));
     }];
 }
+/** 获取个人信息 */
+- (void)loadPersonalModel {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    NSString *urlStr = [NSString stringWithFormat:@"http://myadmin.all-360.com:8080/Admin/AppApi/userInfo/uid/%@",[LDUserInfo sharedLDUserInfo].ID];
+    [manager GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *dataDic = responseObject;
+        NSArray *dataArray = dataDic[@"data"];
+        for (NSDictionary *tempDic in dataArray) {
+            level = tempDic[@"level"];
+        }
+        //        NSLog(@"只为拿到level：%@",dataDic);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    }];
+}
 #pragma mark ----  点击提交定单
 - (void)setOrderBtn: (UIButton *)sender {
-
-    [self.navigationController pushViewController:[ClearingViewController new] animated:YES];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (goodsDataModel *model in self.dataModelArray) {
+        NSDictionary*dic = @{@"uid":[LDUserInfo sharedLDUserInfo].ID ,
+                             @"cpid":model.cpid,
+                             @"cpqs":model.dangqishu,
+                             @"chanpindanjia":model.danjia,
+                             @"shuliang":model.shopsNum,
+                             @"chutype":model.status,
+                             @"abot":level,
+                             @"jifen":model.score_price
+                             
+                             };
+        [arr addObject:dic];
+    }
+    
+    NSDictionary *para = @{@"dingdan":arr};
+    NSLog(@"打印:%@",para);
+    [QLRequest orderRuKuWithPara:para success:^(id response) {
+        NSLog(@"打印上传回调:%@",response);
+        NSString *orderNumber = response[@"data"];
+        payListViewController *vc = [payListViewController new];
+        vc.orderNum = orderNumber;
+        [self.navigationController pushViewController:vc animated:YES];
+    } error:^(id response) {
+        
+    }];
+    
+    
 }
 #pragma mark ----- setBoxCollectionView
 - (void)setBoxCollectionView {
@@ -157,10 +173,9 @@ static NSString *reuseIdentifier = @"cell";
     _boxCollection.showsHorizontalScrollIndicator = NO;
     _boxCollection.backgroundColor = kColor_RGB(241, 238, 238);
     [_boxCollection registerNib:[UINib nibWithNibName:@"CollectionViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
-    /** 注册collectionView 尾部视图的重用池*/
     [_boxCollection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
     [self.view addSubview:_boxCollection];
-
+    [self setNilView];
 }
 #pragma mark ----- <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -168,25 +183,23 @@ static NSString *reuseIdentifier = @"cell";
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
     return self.dataModelArray.count;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     cell.backgroundColor = [UIColor whiteColor];
     goodsDataModel *model = self.dataModelArray[indexPath.row];
-    //把indexpath传到cell里面
     cell.row = indexPath.row;
-
+    
     //判断状态
-    if ([model.status intValue] == 1) {
+    if ([model.status intValue] == 2) {
         cell.model = model;
         cell.dataLabel.hidden = NO;
         cell.ShenYuLabel.hidden = NO;
         cell.AllMoneytopLine.constant = 8;
         cell.DanJiaLabel.font = [UIFont systemFontOfSize:13];
-//        cell.row = indexPath.row;
-    }else if ([model.status intValue] == 2) {
+        //        cell.row = indexPath.row;
+    }else if ([model.status intValue] == 1) {
         cell.model = model;
         cell.dataLabel.hidden = YES;
         cell.ShenYuLabel.hidden = YES;
@@ -201,14 +214,36 @@ static NSString *reuseIdentifier = @"cell";
         cell.DanJiaLabel.font = [UIFont systemFontOfSize:17];
         cell.DanJiaLabel.text = [NSString stringWithFormat:@"积分购:%@元 + %@积分",model.makeup_price,model.score_price];
     }
-#pragma mark   价格显示 block?
-    //实现方法
+    
     cell.block = ^(UIButton *btn , goodsDataModel *model) {
-        //删除当前的cell数据
-        [self.dataModelArray removeObject:model];
-        //刷新视图控制器
-        [self.boxCollection reloadData];
-        
+        [ProgressHUD show];
+        [QLRequest deleteCarItem:[LDUserInfo sharedLDUserInfo].ID carID:model.ID success:^(id response) {
+            [ProgressHUD dismiss];
+            [self request];
+            [ProgressHUD showSuccess];
+        } error:^(id response) {
+            
+        }];
+    };
+    cell.jianBlock=^(UIButton *btn , goodsDataModel *model){
+        [ProgressHUD show];
+        [QLRequest carNumbersEdit:model.ID type:@"-" success:^(id response) {
+            [ProgressHUD dismiss];
+            [self request];
+            [ProgressHUD showSuccess];
+        } error:^(id response) {
+            [ProgressHUD dismiss];
+        }];
+    };
+    cell.jiaBlock=^(UIButton *btn , goodsDataModel *model){
+        [ProgressHUD show];
+        [QLRequest carNumbersEdit:model.ID type:@"+" success:^(id response) {
+            [ProgressHUD dismiss];
+            [self request];
+            [ProgressHUD showSuccess];
+        } error:^(id response) {
+            [ProgressHUD dismiss];
+        }];
     };
     return cell;
 }
@@ -216,49 +251,98 @@ static NSString *reuseIdentifier = @"cell";
     UICollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer" forIndexPath:indexPath];
     footerView.backgroundColor = [UIColor whiteColor];
     [footerView addSubview:_footView];
-
+    
     return footerView;
 }
 
-- (void)loadCellDatas {
-    for (NSDictionary *dic in ShopsIDs) {
-        LDLog(@"%lu---%@",(unsigned long)ShopsIDs.count,ShopsIDs);
-        NSString *statusStr = [NSString stringWithFormat:@"%@",dic[@"status"]];
-        NSString *GoodsNum = [NSString stringWithFormat:@"%@",dic[@"jionNum"]];
-        AFHTTPSessionManager *session = [AFHTTPSessionManager manager];
-        session.responseSerializer = [AFJSONResponseSerializer serializer];
-        session.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
-        NSString *urlStr = [NSString stringWithFormat:@"http://myadmin.all-360.com:8080/Admin/AppApi/productShow/id/%@",dic[@"goodsID"]];
-        [session GET:urlStr parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            LDLog(@"%@",responseObject);
-            NSDictionary *dataDic = responseObject;
+
+-(NSString*)judgeLogin{
+    NSString *userid;
+    [[LDUserInfo sharedLDUserInfo] readUserInfo];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *isLogin = [user objectForKey:@"isLogin"];
+    if ([isLogin intValue] == 0) {
+        if ([LDUserInfo sharedLDUserInfo].isLogin == YES) {
+            [[LDUserInfo sharedLDUserInfo] readUserInfo];
+            userid = [LDUserInfo sharedLDUserInfo].ID ;
+            
+        } else {
+            loginViewController *vc = [loginViewController new] ;
+            vc.type = 1;
+            [self.navigationController pushViewController:vc animated:YES];
+            return nil;
+        }
+    }else if ([isLogin intValue] != 0) {
+        userid = [user objectForKey:@"userID"];
+    }
+    return userid;
+    
+}
+-(void)request{
+    NSString* result = [self judgeLogin];
+    NSLog(@"结果是:%@",result);
+    if (result) {
+        [ProgressHUD show];
+        [QLRequest queryCarList:[self judgeLogin] success:^(id response) {
+            [ProgressHUD dismiss];
+            [self.dataModelArray removeAllObjects];
+            NSLog(@"打印返回gouwuche list:%@",response);
+            NSDictionary *dataDic = response;
             NSArray *dataArray = dataDic[@"data"];
+            if (dataArray.count==0) {
+                _nilView.hidden = NO;
+            }else{
+                _nilView.hidden = YES;
+            }
             for (NSDictionary *tempDic in dataArray) {
-                NSLog(@"%lu",(unsigned long)dataArray.count);
                 goodsDataModel *model = [goodsDataModel setDataWithDic:tempDic];
                 //赋值状态
-                model.status = statusStr;
-                model.shopsNum = GoodsNum;
                 [self.dataModelArray addObject:model];
             }
-            [self.boxCollection reloadData];
-            _bottomLabel.text = [NSString stringWithFormat:@"共参与%lu件商品",(unsigned long)ShopsIDs.count];
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            LDLog(@"error = %@",error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.boxCollection reloadData];
+            });
+        } error:^(id response) {
+            [ProgressHUD dismiss];
         }];
+        [self queryTotalPrice];
+        [self loadPersonalModel];
+    }else{
+        return;
     }
+    
 }
 
+-(void)queryTotalPrice{
+    [QLRequest totalPrice:[LDUserInfo sharedLDUserInfo].ID  success:^(id response) {
+        __block NSString *zongjia = response[@"data"];
+        NSLog(@"查询总价：%@",response);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if ([response[@"data"]isKindOfClass:[NSNull class]]) {
+                zongjia = @"0";
+                
+            }
+            _bottomLabel.text = [NSString stringWithFormat:@"总价:%@元",zongjia];
+        });
+    } error:^(id response) {
+    }];
+}
 
-
-
-
-
-
-
-
-
+#pragma mark ----- 如果为空 显示空视图
+- (void)setNilView {
+    _nilView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _nilView.backgroundColor = kColor_RGB(241, 238, 238);
+    [self.view addSubview:_nilView];
+//    _nilView.hidden = YES;
+    _nilImageView = [UIImageView new];
+    _nilImageView.image = [UIImage imageNamed:@"空箱子"];
+    [_nilView addSubview:_nilImageView];
+    [_nilImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(100);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 400));
+        make.left.mas_equalTo(0);
+    }];
+}
 
 
 
@@ -294,17 +378,8 @@ static NSString *reuseIdentifier = @"cell";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

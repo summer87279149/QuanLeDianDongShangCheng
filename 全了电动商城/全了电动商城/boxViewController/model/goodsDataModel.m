@@ -14,16 +14,21 @@
 }
 - (instancetype)initWithDic:(NSDictionary *)dic {
     if (self = [super init]) {
-        self.name = dic[@"name"];
-        self.zhigoujia = dic[@"zhigoujia"];
-        self.danjia = dic[@"danjia"];
-        self.qianggou = dic[@"qianggou"];
-        self.yigou = dic[@"yigou"];
-        self.suoluetu = dic[@"suoluetu"];
         self.ID = dic[@"id"];
+        self.cpid = dic[@"cpid"];
+        self.name = dic[@"name"];
+        self.shopsNum = dic[@"num"];
+        self.danjia = dic[@"danjia"];
+        self.status = dic[@"chutype"];
+        self.totalPrice = dic[@"zongjia"];
+        self.suoluetu = dic[@"suoluetu"];
         self.dangqishu = dic[@"dangqishu"];
-        self.makeup_price  = dic[@"makeup_price"];
-        self.score_price  = dic[@"score_price"];
+        self.yigou = dic[@"yigou"];
+        self.score_price  = dic[@"jifen"];
+        self.qianggou = dic[@"qianggou"];
+        self.zhigoujia = dic[@"zongjia"];
+//        self.makeup_price  = dic[@"makeup_price"];
+        
     }
     return self;
 }

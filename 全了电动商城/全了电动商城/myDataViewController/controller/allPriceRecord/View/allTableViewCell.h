@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *zongjia;
 @property (weak, nonatomic) IBOutlet UILabel *off;
 @property (weak, nonatomic) IBOutlet UILabel *fahuooff;
+@property (weak, nonatomic) IBOutlet UIButton *writeAddress;
 @property (nonatomic , strong)allModel *model;
 @end

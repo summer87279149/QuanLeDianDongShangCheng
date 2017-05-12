@@ -5,7 +5,7 @@
 //  Created by 懒洋洋 on 2017/1/16.
 //  Copyright © 2017年 亮点网络. All rights reserved.
 //
-
+#import "adressViewController.h"
 #import "allPriceViewController.h"
 #import "allTableViewCell.h"
 #import "allModel.h"
@@ -100,10 +100,32 @@ static NSString *reuseIndentifier = @"cell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataModelArray.count;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+     allModel *model = self.dataModelArray[indexPath.row];
+    if ([model.off isEqualToString:@"成功"]&&[model.fahuooff isEqualToString:@"待填写收货地址"]) {
+        LDUserInfo* user = [LDUserInfo sharedLDUserInfo];
+        [user readUserInfo];
+        adressViewController*vc = [adressViewController new];
+        vc.userId = user.ID;
+        vc.callback = ^(NSString * addid,NSString*addressDetail){
+            NSLog(@"地址id:%@,详细地址:%@",addid,addressDetail);
+            NSLog(@"%@",model.did);
+            [QLRequest zhiGouAddreddModify:addid andDid:model.did success:^(id response) {
+                [self.tableView headerSetState:CoreHeaderViewRefreshStateRefreshing];
+            } error:^(id response) {
+                [ProgressHUD showError:@"修改失败请重试"];
+            }];
+        };
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     allTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIndentifier forIndexPath:indexPath];
     allModel *model = self.dataModelArray[indexPath.row];
     cell.model = model;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

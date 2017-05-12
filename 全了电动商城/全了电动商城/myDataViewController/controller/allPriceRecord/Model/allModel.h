@@ -17,5 +17,7 @@
 @property (nonatomic, strong)NSString *off;
 /** 发货状态 */
 @property (nonatomic, strong)NSString *fahuooff;
+//地址id
+@property (nonatomic, strong)NSString *did;
 + (instancetype)setAllDataWithDic:(NSDictionary *)dic;
 @end

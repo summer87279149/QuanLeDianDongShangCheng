@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="361" height="119"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="361" height="118.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="361" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单号:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLS-i8-KmX">
@@ -54,6 +55,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fBC-tr-FdZ">
+                        <rect key="frame" x="262" y="81" width="81" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="  请填写地址  ">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="sLS-i8-KmX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Bxq-ae-Iwz"/>
@@ -63,6 +71,8 @@
                     <constraint firstItem="dDr-9j-fYa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="LXB-eQ-ut8"/>
                     <constraint firstItem="KDs-49-dQC" firstAttribute="top" secondItem="sLS-i8-KmX" secondAttribute="bottom" constant="5" id="QoW-OP-Qrg"/>
                     <constraint firstItem="sLS-i8-KmX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="eBk-wt-3CB"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="fBC-tr-FdZ" secondAttribute="trailing" constant="10" id="g00-rw-QDS"/>
+                    <constraint firstItem="fBC-tr-FdZ" firstAttribute="centerY" secondItem="fr8-gc-CY6" secondAttribute="centerY" id="psT-dl-BjM"/>
                     <constraint firstItem="KDs-49-dQC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="rA0-jC-uT1"/>
                 </constraints>
             </tableViewCellContentView>
@@ -70,6 +80,7 @@
                 <outlet property="fahuooff" destination="fr8-gc-CY6" id="P0b-ru-PUM"/>
                 <outlet property="off" destination="dDr-9j-fYa" id="qXt-JX-7be"/>
                 <outlet property="orderid" destination="sLS-i8-KmX" id="aQ2-U1-LrM"/>
+                <outlet property="writeAddress" destination="fBC-tr-FdZ" id="nWx-nx-IgR"/>
                 <outlet property="zongjia" destination="KDs-49-dQC" id="CRd-pF-UJV"/>
             </connections>
             <point key="canvasLocation" x="35.5" y="-59.5"/>

@@ -54,6 +54,14 @@
         xt_error(error);
     }];
 }
++(void)zhiGouAddreddModify:(NSString*)addressID andDid:(NSString*)did success:(Success)xt_success error:(Error)xt_error{
+//    NSLog(@"参数%@",);
+    [XTRequestManager GET:@"http://myadmin.all-360.com:8080/Admin/AppApi/addressDan" parameters:@{@"id":addressID,@"did":did} responseSeializerType:NHResponseSeializerTypeDefault success:^(id responseObject) {
+        xt_success(responseObject);
+    } failure:^(NSError *error) {
+        xt_error(error);
+    }];
+}
 +(void)deleteAddress:(NSString*)ID success:(Success)xt_success error:(Error)xt_error;{
     [XTRequestManager GET:XT_REQUEST_URL(@"/Admin/AppApi/addressDel") parameters:@{@"id":ID} responseSeializerType:NHResponseSeializerTypeDefault success:^(id responseObject) {
         xt_success(responseObject);

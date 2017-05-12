@@ -43,4 +43,6 @@
 +(void)submitGetMoneyWithPara:(NSDictionary*)para success:(Success)xt_success error:(Error)xt_error;
 //删除地址
 +(void)deleteAddress:(NSString*)ID success:(Success)xt_success error:(Error)xt_error;
+//直购记录地址修改
++(void)zhiGouAddreddModify:(NSString*)addressID andDid:(NSString*)did success:(Success)xt_success error:(Error)xt_error;
 @end

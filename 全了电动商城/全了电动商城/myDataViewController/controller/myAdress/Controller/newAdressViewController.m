@@ -218,7 +218,6 @@
     NSDate* date1 = [NSDate date];
     NSTimeInterval time1 =[date1 timeIntervalSince1970];
     NSString *timeString = [NSString stringWithFormat:@"%.0f",time1];
-    LDLog(@"系统时间戳:%@",timeString);
     //发送数据
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -227,7 +226,6 @@
     //把参数写到字典里
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:11];
     parameters[@"uid"] = self.userId;
-    NSLog(@"%@",self.userId);
     parameters[@"xingming"] = _nameField.text;
     parameters[@"shouji"] = _phoneField.text;
     parameters[@"diqu"] = _RegionStr;
@@ -301,7 +299,7 @@
 {
     if (component == 0) {
         cityModel *goodsModel = self.cityArray[row];
-        NSLog(@"%@",goodsModel.cityName);
+//        NSLog(@"%@",goodsModel.cityName);
         self.shenStr = [NSString stringWithFormat:@"%@",goodsModel.cityName];
         [self loadSecondArrayDatabySID:goodsModel.diqu];
     } else if (component == 1) {
@@ -311,10 +309,11 @@
     }else {
         cityModel *goodsModel = self.thirdArray[row];
         self.quStr = [NSString stringWithFormat:@"%@",goodsModel.cityName];
-        NSLog(@"最后获取到的地区编码=%@",goodsModel.diqu);
+//        NSLog(@"最后获取到的地区编码=%@",goodsModel.diqu);
         _RegionStr = goodsModel.diqu;
-        _AdressLabel.text = [NSString stringWithFormat:@"%@%@%@",self.shenStr,self.shiStr,self.quStr];
+        
     }
+    _AdressLabel.text = [NSString stringWithFormat:@"%@%@%@",self.shenStr,self.shiStr,self.quStr];
         LDLog(@"%@%@%@",self.shenStr,self.shiStr,self.quStr);
 }
 
@@ -341,11 +340,12 @@
     session.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSString *urlStr = [NSString stringWithFormat:@"http://myadmin.all-360.com:8080/Admin/AppApi/city"];
     [session GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"fanhui %@",responseObject);
         //如果数组 是NSArray  这里是字典就用字典接受responseObject 数据
         NSDictionary *dataDic = responseObject;
         //data 里面是数组  用数组接受
         NSArray *dataArray = dataDic[@"data"];
-        
+        [self loadSecondArrayDatabySID:dataArray[0][@"diqu"]];
         //里面是数组就用数组接受 现在是字典
         for (NSDictionary *tempDic in dataArray) {
             //取出数据 //调用初始化方法 把tempDic 字典 转换成模型  调用类方法
@@ -367,11 +367,11 @@
     session.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSString *urlStr = [NSString stringWithFormat:@"http://myadmin.all-360.com:8080/Admin/AppApi/city/sid/%@",mysid];//这里跟上第一级数据对应的diqu编码
     [session GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        //如果数组 是NSArray  这里是字典就用字典接受responseObject 数据
         NSDictionary *dataDic = responseObject;
         [self.secondCityArr removeAllObjects];
         //data 里面是数组  用数组接受
         NSArray *dataArray = dataDic[@"data"];
+        [self loadThirdArrayDatabySID:dataArray[0][@"diqu"]];
         //里面是数组就用数组接受 现在是字典
         for (NSDictionary *tempDic in dataArray) {
             //取出数据 //调用初始化方法 把tempDic 字典 转换成模型  调用类方法

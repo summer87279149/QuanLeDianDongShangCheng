@@ -15,6 +15,10 @@
     self.zongjia.text = [NSString stringWithFormat:@"总价:%@",model.zongjia];
     self.off.text = [NSString stringWithFormat:@"支付状态:%@",model.off];
     self.fahuooff.text = [NSString stringWithFormat:@"收货地址:%@",model.fahuooff];
+    NSLog(@"%@===%@",model.off,model.fahuooff);
+    if ([model.off isEqualToString:@"成功"]&&[model.fahuooff isEqualToString:@"待填写收货地址"]) {
+        self.writeAddress.hidden = NO;
+    }
 }
 
 
@@ -28,7 +32,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.writeAddress.layer.borderWidth = 1;
+    self.writeAddress.layer.cornerRadius = 2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

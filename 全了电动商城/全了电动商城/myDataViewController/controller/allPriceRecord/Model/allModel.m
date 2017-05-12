@@ -18,6 +18,7 @@
         self.zongjia = dic[@"zongjia"];
         self.off = dic[@"off"];
         self.fahuooff = dic[@"fahuooff"];
+        self.did = dic[@"did"];
     }
     return self;
 }

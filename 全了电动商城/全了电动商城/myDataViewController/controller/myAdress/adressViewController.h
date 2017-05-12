@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^callBack)(NSString *addid,NSString *addressDetail);
 
 @interface adressViewController : UIViewController
 @property (nonatomic , strong)NSString *userId;
+@property (nonatomic, copy) callBack callback;
 @end

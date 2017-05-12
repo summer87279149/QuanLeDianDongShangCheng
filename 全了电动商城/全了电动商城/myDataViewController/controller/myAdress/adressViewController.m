@@ -172,7 +172,13 @@ static NSString *reuseIndentifier = @"cell";
     return 100;
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(self.callback){
+        adressModel *model = self.dataModelArray[indexPath.row];
+        self.callback(model.addressID,model.beizhu);
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 
 

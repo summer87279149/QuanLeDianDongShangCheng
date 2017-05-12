@@ -12,9 +12,9 @@
 
 - (void)setModel:(allModel *)model {
     self.orderid.text = [NSString stringWithFormat:@"订单号:%@",model.orderid];
-    self.zongjia.text = [NSString stringWithFormat:@"订单号:%@",model.zongjia];
-    self.off.text = [NSString stringWithFormat:@"订单号:%@",model.off];
-    self.fahuooff.text = [NSString stringWithFormat:@"订单号:%@",model.fahuooff];
+    self.zongjia.text = [NSString stringWithFormat:@"总价:%@",model.zongjia];
+    self.off.text = [NSString stringWithFormat:@"支付状态:%@",model.off];
+    self.fahuooff.text = [NSString stringWithFormat:@"收货地址:%@",model.fahuooff];
 }
 
 

@@ -54,6 +54,13 @@
         xt_error(error);
     }];
 }
++(void)deleteAddress:(NSString*)ID success:(Success)xt_success error:(Error)xt_error;{
+    [XTRequestManager GET:XT_REQUEST_URL(@"/Admin/AppApi/addressDel") parameters:@{@"id":ID} responseSeializerType:NHResponseSeializerTypeDefault success:^(id responseObject) {
+        xt_success(responseObject);
+    } failure:^(NSError *error) {
+        xt_error(error);
+    }];
+}
 +(void)totalPrice:(NSString*)uid success:(Success)xt_success error:(Error)xt_error{
     [XTRequestManager GET:XT_REQUEST_URL(@"/Admin/AppApi/shopCartTotal") parameters:@{@"uid":uid} responseSeializerType:NHResponseSeializerTypeDefault success:^(id responseObject) {
         xt_success(responseObject);

@@ -125,6 +125,7 @@ static NSString *reuseIndentifier = @"cell";
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 50) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.tableFooterView = [UIView new];
     [_tableView registerNib:[UINib nibWithNibName:@"adressTableViewCell" bundle:nil] forCellReuseIdentifier:reuseIndentifier];
     _tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tableView];
@@ -133,6 +134,31 @@ static NSString *reuseIndentifier = @"cell";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"删除";
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    adressModel *model =  self.dataModelArray[indexPath.row];
+
+    [QLRequest deleteAddress:model.addressID success:^(id response) {
+        if ([response[@"code"]intValue]==7400) {
+            [ProgressHUD showSuccess];
+            [self.dataModelArray removeObjectAtIndex:indexPath.row];
+            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }else{
+            [ProgressHUD showError:response[@"message"]];
+        }
+    } error:^(id response) {
+        
+    }];
+    
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataModelArray.count;
 }
@@ -158,6 +184,7 @@ static NSString *reuseIndentifier = @"cell";
     session.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     NSString *urlStr = [NSString stringWithFormat:@"http://myadmin.all-360.com:8080/Admin/AppApi/address/uid/%@",self.userId];
     [session GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
         //如果数组 是NSArray  这里是字典就用字典接受responseObject 数据
         NSDictionary *dataDic = responseObject;
         //data 里面是数组  用数组接受

@@ -41,4 +41,6 @@
 +(void)getMoneyTypeSuccess:(Success)xt_success error:(Error)xt_error;
 //提交提现请求
 +(void)submitGetMoneyWithPara:(NSDictionary*)para success:(Success)xt_success error:(Error)xt_error;
+//删除地址
++(void)deleteAddress:(NSString*)ID success:(Success)xt_success error:(Error)xt_error;
 @end

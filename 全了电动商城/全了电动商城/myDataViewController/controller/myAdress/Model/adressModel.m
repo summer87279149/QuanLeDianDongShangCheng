@@ -18,6 +18,7 @@
         self.beizhu = dic[@"beizhu"];
         self.xingming = dic[@"xingming"];
         self.shouji = dic[@"shouji"];
+        self.addressID = dic[@"id"];
     }
     return self;
 }

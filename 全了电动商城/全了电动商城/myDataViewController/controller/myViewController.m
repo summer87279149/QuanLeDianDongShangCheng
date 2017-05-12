@@ -172,7 +172,7 @@ static NSString *Indentifier = @"TabelCell";
         cell.MarkLabel.text = [myCollectionModel new].functionLabels[indexPath.row];
         cell.MarkImage.image = [UIImage imageNamed:[myCollectionModel new].functionImages[indexPath.row]];
     }
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }

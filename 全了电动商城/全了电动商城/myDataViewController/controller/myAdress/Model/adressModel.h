@@ -17,6 +17,8 @@
 @property (nonatomic, strong)NSString *shouji;
 /** 名字 */
 @property (nonatomic, strong)NSString *xingming;
+//地址id
+@property (nonatomic, strong)NSString *addressID;
 
 + (instancetype)setAdressDataWithDic:(NSDictionary *)dic;
 

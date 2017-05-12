@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface shareViewController : UIViewController
-
+@property (nonatomic, copy) NSString *qrImgStr;
 @end

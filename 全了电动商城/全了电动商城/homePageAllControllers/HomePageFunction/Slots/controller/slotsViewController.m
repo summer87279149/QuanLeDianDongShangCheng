@@ -54,10 +54,10 @@
 
 //WKNavigationDelegate
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation {
-    NSLog(@"加载成功");
+//    NSLog(@"加载成功");
 }
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
-    NSLog(@"失败%@" , error);
+//    NSLog(@"失败%@" , error);
 }
 
 

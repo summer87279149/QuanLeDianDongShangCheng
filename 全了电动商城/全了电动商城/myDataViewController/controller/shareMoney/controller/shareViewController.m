@@ -5,7 +5,9 @@
 //  Created by 懒洋洋 on 2017/4/22.
 //  Copyright © 2017年 亮点网络. All rights reserved.
 //
-
+#import "GetMoneyRecordViewController.h"
+#import "YongjinViewController.h"
+#import "InviteRecordViewController.h"
 #import "shareViewController.h"
 #import "shareTopView.h"
 #import "inviteExplain.h"
@@ -13,6 +15,7 @@
 #import "depositAccount.h"
 
 @interface shareViewController ()<UITableViewDelegate , UITableViewDataSource>
+
 @property (nonatomic , strong)UITableView *shareVC;
 @property (nonatomic , strong)shareTopView *topV;
 
@@ -27,7 +30,6 @@
     [self configNavigation];
     [self setTopView];
     [self setBottomView];
-
     
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -55,7 +57,7 @@
 }
 - (void)setTableView {
     self.shareVC.backgroundColor = [UIColor whiteColor];
-    self.shareVC = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    self.shareVC = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-60) style:UITableViewStyleGrouped];
     self.shareVC.showsVerticalScrollIndicator = NO;
     self.shareVC.showsHorizontalScrollIndicator = NO;
     _shareVC.delegate = self;
@@ -66,6 +68,7 @@
 - (void)setTopView {
     _topV = [[NSBundle mainBundle] loadNibNamed:
              @"shareTopView" owner:nil options:nil ].lastObject;
+    _topV.imgURL = self.qrImgStr;
     _topV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 406);
 }
 - (void)setBottomView {
@@ -81,7 +84,7 @@
     }];
     
     UIButton *ExtractCash = [[UIButton alloc]init];
-    [ExtractCash setTitle:@"佣金体现" forState:UIControlStateNormal];
+    [ExtractCash setTitle:@"佣金提现" forState:UIControlStateNormal];
     [ExtractCash setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [ExtractCash setBackgroundImage:[UIImage imageNamed:@"橘色背景"] forState:UIControlStateNormal];
     [ExtractCash addTarget:self action:@selector(setExtractCashBtn) forControlEvents:UIControlEventTouchUpInside];
@@ -92,17 +95,20 @@
     [Recharge setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [Recharge setBackgroundImage:[UIImage imageNamed:@"橘色"] forState:UIControlStateNormal];
     [Recharge addTarget:self action:@selector(setRechargeBtn) forControlEvents:UIControlEventTouchUpInside];
-    [bottomView addSubview:Recharge];
+//    [bottomView addSubview:Recharge];
+    
     [ExtractCash mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(10);
+//        make.left.mas_equalTo(10);
         make.top.mas_equalTo(10);
         make.size.mas_equalTo(CGSizeMake((SCREEN_WIDTH - 30)/2, 40));
+        make.centerX.mas_equalTo(self.view);
     }];
-    [Recharge mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(ExtractCash.mas_right).offset(10);
-        make.top.mas_equalTo(10);
-        make.size.mas_equalTo(CGSizeMake((SCREEN_WIDTH - 30)/2, 40));
-    }];
+    
+//    [Recharge mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(ExtractCash.mas_right).offset(10);
+//        make.top.mas_equalTo(10);
+//        make.size.mas_equalTo(CGSizeMake((SCREEN_WIDTH - 30)/2, 40));
+//    }];
     
 }
 
@@ -116,7 +122,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 6;
+    return 4;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -131,6 +137,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor grayColor];
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -139,7 +146,7 @@
     }else if (indexPath.row == 1) {
         cell.textLabel.text = @"佣金明细";
     }else if (indexPath.row == 2) {
-        cell.textLabel.text = @"体现记录";
+        cell.textLabel.text = @"提现记录";
     }else if (indexPath.row == 3) {
         cell.textLabel.text = @"邀请说明";
     }
@@ -153,14 +160,22 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
-        case 0:
+        case 0:{
+            InviteRecordViewController *vc = [[InviteRecordViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
             
+        }
             break;
-        case 1:
-            
+        case 1:{
+            YongjinViewController *vc = [[YongjinViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
-        case 2:
+        case 2:{
             
+            GetMoneyRecordViewController *vc = [[GetMoneyRecordViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
         case 3:
             [self.navigationController pushViewController:[inviteExplain new] animated:YES];

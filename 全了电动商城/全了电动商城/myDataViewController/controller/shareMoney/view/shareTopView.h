@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface shareTopView : UIView
+@property (nonatomic, copy) NSString *imgURL;
 //用户的UID
 @property (weak, nonatomic) IBOutlet UILabel *userUID;
 //点击生成用户的二维码

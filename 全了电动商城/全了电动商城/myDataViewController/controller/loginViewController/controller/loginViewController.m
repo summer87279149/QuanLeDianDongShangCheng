@@ -63,6 +63,8 @@
 //
     if(self.type==1){
         [self.navigationController popViewControllerAnimated:YES];
+    }else if(self.type==2){
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }else{
         [self.storyboard instantiateViewControllerWithIdentifier:@"Main"];
         self.tabBarController.selectedIndex = 0;
@@ -282,14 +284,11 @@
 //    //第三方向微信终端发送一个SendAuthReq消息结构
 //    [WXApi sendReq:req];
 //    NSLog(@"%@",req);
-    
-    
     [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:self completion:^(id result, NSError *error) {
         if (error) {
             NSLog(@"error == %@",error);
         }else {
             UMSocialUserInfoResponse *resp = result;
-            
             //        发送数据   /** 向后台发送json格式的数据传输值 */
             AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
             //申明返回的结果是json类型   申明请求的数据是json类型

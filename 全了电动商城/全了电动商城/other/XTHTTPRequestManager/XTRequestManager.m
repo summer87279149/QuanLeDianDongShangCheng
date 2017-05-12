@@ -61,26 +61,19 @@ static int XTNetworkStatus = AFNetworkReachabilityStatusReachableViaWiFi;
 responseSeializerType:(NHResponseSeializerType)type
     success:(void (^)(id))success
     failure:(void (^)(NSError *))failure {
-    if (XTNetworkStatus==AFNetworkReachabilityStatusNotReachable) {
-//        [MBProgressHUD showMessage:@"无网络" toView:[UIApplication sharedApplication].keyWindow];
-        return;
-    }
-    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager sharedManager];
-//    manager.requestSerializer.cachePolicy= NSURLRequestReturnCacheDataElseLoad;
     manager.requestSerializer.timeoutInterval=30.f;
        // 如果不是JSON 或者 不是Default 才设置解析器类型
     if (type != NHResponseSeializerTypeJSON && type != NHResponseSeializerTypeDefault) {
         manager.responseSerializer = [self responseSearalizerWithSerilizerType:type];
     }
+    NSLog(@"URLString=%@",URLString);
     [manager GET:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
             success(responseObject);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        // 失败
         if (failure) {
-//            [MBProgressHUD showError:@"请求超时，请检查网络状况"];
             NSLog(@"请求失败统一返回错误信息:%@",error);
             failure(error);
         }
@@ -98,9 +91,7 @@ responseSeializerType:(NHResponseSeializerType)type
         return;
     }
     AFHTTPSessionManager *manager = [AFHTTPSessionManager sharedManager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    
-    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];    
     // 如果不是JSON 或者 不是Default 才设置解析器类型
     if (type != NHResponseSeializerTypeJSON && type != NHResponseSeializerTypeDefault) {
         manager.responseSerializer = [self responseSearalizerWithSerilizerType:type];

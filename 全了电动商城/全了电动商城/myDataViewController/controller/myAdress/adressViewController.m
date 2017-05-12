@@ -92,6 +92,7 @@ static NSString *reuseIndentifier = @"cell";
 - (void) dealBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (void)gotoNewAdressViewController {
     newAdressViewController *adressVC = [[newAdressViewController alloc]init];
     adressVC.userId = self.userId;

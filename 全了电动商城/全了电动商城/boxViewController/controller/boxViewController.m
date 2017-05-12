@@ -5,6 +5,7 @@
 //  Created by 懒洋洋 on 2016/12/29.
 //  Copyright © 2016年 亮点网络. All rights reserved.
 //
+
 #import "payListViewController.h"
 #import "loginViewController.h"
 #import "boxViewController.h"
@@ -49,10 +50,8 @@ static NSString *reuseIdentifier = @"cell";
     [super viewDidLoad];
     self.view.backgroundColor = kColor_RGB(241, 238, 238);
     [self setFootView];
-    
     [self configNavigation];
     [self setBoxCollectionView];
-    
     
 }
 
@@ -138,15 +137,12 @@ static NSString *reuseIdentifier = @"cell";
                              @"chutype":model.status,
                              @"abot":level,
                              @"jifen":model.score_price
-                             
                              };
         [arr addObject:dic];
     }
     
     NSDictionary *para = @{@"dingdan":arr};
-    NSLog(@"打印:%@",para);
     [QLRequest orderRuKuWithPara:para success:^(id response) {
-        NSLog(@"打印上传回调:%@",response);
         NSString *orderNumber = response[@"data"];
         payListViewController *vc = [payListViewController new];
         vc.orderNum = orderNumber;
@@ -175,11 +171,11 @@ static NSString *reuseIdentifier = @"cell";
     [_boxCollection registerNib:[UINib nibWithNibName:@"CollectionViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     [_boxCollection registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"footer"];
     [self.view addSubview:_boxCollection];
+//    [_boxCollection addFooterWithCallback:
     [self setNilView];
 }
 #pragma mark ----- <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -218,6 +214,7 @@ static NSString *reuseIdentifier = @"cell";
     cell.block = ^(UIButton *btn , goodsDataModel *model) {
         [ProgressHUD show];
         [QLRequest deleteCarItem:[LDUserInfo sharedLDUserInfo].ID carID:model.ID success:^(id response) {
+            NSLog(@"%@",response);
             [ProgressHUD dismiss];
             [self request];
             [ProgressHUD showSuccess];
@@ -280,10 +277,9 @@ static NSString *reuseIdentifier = @"cell";
 }
 -(void)request{
     NSString* result = [self judgeLogin];
-    NSLog(@"结果是:%@",result);
     if (result) {
         [ProgressHUD show];
-        [QLRequest queryCarList:[self judgeLogin] success:^(id response) {
+        [QLRequest queryCarList:result success:^(id response) {
             [ProgressHUD dismiss];
             [self.dataModelArray removeAllObjects];
             NSLog(@"打印返回gouwuche list:%@",response);
@@ -318,9 +314,9 @@ static NSString *reuseIdentifier = @"cell";
         __block NSString *zongjia = response[@"data"];
         NSLog(@"查询总价：%@",response);
         dispatch_async(dispatch_get_main_queue(), ^{
+            [_boxCollection setHeader:CoreHeaderViewRefreshStateNorMal];
             if ([response[@"data"]isKindOfClass:[NSNull class]]) {
                 zongjia = @"0";
-                
             }
             _bottomLabel.text = [NSString stringWithFormat:@"总价:%@元",zongjia];
         });

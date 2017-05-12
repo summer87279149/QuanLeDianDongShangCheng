@@ -24,16 +24,16 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
     UIAlertAction *WeiXinAction = [UIAlertAction actionWithTitle:@"微信分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self shareTextToPlatformType:UMSocialPlatformType_WechatSession];
+        [self shareImageToPlatformType:UMSocialPlatformType_WechatSession];
     }];
     UIAlertAction *WeiChartAction = [UIAlertAction actionWithTitle:@"微信朋友圈分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self shareTextToPlatformType:UMSocialPlatformType_WechatTimeLine];
+        [self shareImageToPlatformType:UMSocialPlatformType_WechatTimeLine];
         }];
     UIAlertAction *QQAction = [UIAlertAction actionWithTitle:@"QQ分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self shareTextToPlatformType:UMSocialPlatformType_QQ];
+        [self shareImageToPlatformType:UMSocialPlatformType_QQ];
     }];
     UIAlertAction *Qzone = [UIAlertAction actionWithTitle:@"QQ空间分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self shareTextToPlatformType:UMSocialPlatformType_Qzone];
+        [self shareImageToPlatformType:UMSocialPlatformType_Qzone];
     }];
     
     UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -70,8 +70,9 @@
     //创建图片内容对象
     UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
     //如果有缩略图，则设置缩略图
-    shareObject.thumbImage = [UIImage imageNamed:@"icon"];
-    [shareObject setShareImage:@"https://mobile.umeng.com/images/pic/home/social/img-1.png"];
+//    shareObject.thumbImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imgURL]]];
+    
+    [shareObject setShareImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imgURL]]]];
     
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;

@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExtractCash">
             <connections>
+                <outlet property="beizhu" destination="ZDS-ic-XBb" id="nB2-ao-Nbb"/>
+                <outlet property="getMoneyTpye" destination="KRK-fT-IBL" id="sb2-QD-BYV"/>
+                <outlet property="jine" destination="cz6-PE-7Kf" id="rXx-pU-Z8O"/>
+                <outlet property="listMoneyLabel" destination="JYg-4w-nwH" id="MNc-S0-VQL"/>
+                <outlet property="name" destination="snV-2X-8Or" id="nAs-bZ-yKH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="zhanghao" destination="rMS-Ph-joY" id="6lR-nK-IYB"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -73,6 +79,9 @@
                     <state key="normal" title="支付宝">
                         <color key="titleColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="typeBtnClicked:" destination="-1" eventType="touchUpInside" id="qef-ew-fTJ"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxx-Cl-cQE">
                     <rect key="frame" x="0.0" y="91" width="375" height="1"/>
@@ -119,6 +128,9 @@
                     <state key="normal" title="提取金额" backgroundImage="提交订单">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="submit:" destination="-1" eventType="touchUpInside" id="Ta0-2P-DKA"/>
+                    </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入提款金额:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cz6-PE-7Kf">
                     <rect key="frame" x="94" y="179" width="261" height="30"/>
@@ -127,7 +139,7 @@
                     </constraints>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="join"/>
+                    <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="join"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入备注信息:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZDS-ic-XBb">
                     <rect key="frame" x="94" y="138" width="261" height="30"/>
@@ -156,12 +168,19 @@
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYg-4w-nwH">
+                    <rect key="frame" x="20" y="220" width="335" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="snV-2X-8Or" firstAttribute="top" secondItem="CfD-Ca-lKU" secondAttribute="bottom" constant="5" id="7T5-kU-5d3"/>
                 <constraint firstItem="cz6-PE-7Kf" firstAttribute="leading" secondItem="0Z9-jz-vmI" secondAttribute="trailing" constant="20" id="89T-Od-aWR"/>
                 <constraint firstItem="CfD-Ca-lKU" firstAttribute="top" secondItem="KRK-fT-IBL" secondAttribute="bottom" constant="10" id="CTT-O5-Fjs"/>
+                <constraint firstItem="JYg-4w-nwH" firstAttribute="top" secondItem="h1g-Dt-1NZ" secondAttribute="bottom" constant="5" id="CW7-6g-4MY"/>
                 <constraint firstItem="Dau-EY-ME2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="CeZ-6l-Huy"/>
                 <constraint firstItem="625-qy-CVg" firstAttribute="top" secondItem="CfD-Ca-lKU" secondAttribute="bottom" constant="10" id="DZj-FS-1CG"/>
                 <constraint firstItem="qao-NV-YUB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="DkC-Ny-1lA"/>
@@ -170,6 +189,7 @@
                 <constraint firstItem="bsf-z6-Oro" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JG9-Qq-JO2"/>
                 <constraint firstAttribute="trailing" secondItem="h1g-Dt-1NZ" secondAttribute="trailing" id="KdL-gQ-SLh"/>
                 <constraint firstItem="5LG-KG-d8m" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="MfF-Uh-RcL"/>
+                <constraint firstAttribute="trailing" secondItem="JYg-4w-nwH" secondAttribute="trailing" constant="20" id="N1a-Jw-tIk"/>
                 <constraint firstItem="625-qy-CVg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="OA2-Ry-tUj"/>
                 <constraint firstItem="fxx-Cl-cQE" firstAttribute="top" secondItem="625-qy-CVg" secondAttribute="bottom" constant="10" id="QFb-bH-bUf"/>
                 <constraint firstItem="cz6-PE-7Kf" firstAttribute="top" secondItem="Rol-Xp-BBq" secondAttribute="bottom" constant="5" id="Qso-DN-gtd"/>
@@ -196,6 +216,7 @@
                 <constraint firstItem="CfD-Ca-lKU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="mr5-Q8-ly3"/>
                 <constraint firstAttribute="trailing" secondItem="CfD-Ca-lKU" secondAttribute="trailing" id="nZP-D7-d9B"/>
                 <constraint firstAttribute="trailing" secondItem="cz6-PE-7Kf" secondAttribute="trailing" constant="20" id="ntH-Mb-YcS"/>
+                <constraint firstItem="JYg-4w-nwH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="qTA-Yo-cOl"/>
                 <constraint firstItem="0Z9-jz-vmI" firstAttribute="top" secondItem="Rol-Xp-BBq" secondAttribute="bottom" constant="10" id="rHv-uo-AUm"/>
                 <constraint firstItem="snV-2X-8Or" firstAttribute="leading" secondItem="625-qy-CVg" secondAttribute="trailing" constant="20" id="rJ1-kO-oKI"/>
                 <constraint firstItem="5LG-KG-d8m" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="sJr-77-ipi"/>

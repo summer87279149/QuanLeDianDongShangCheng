@@ -20,6 +20,8 @@
 @property (nonatomic , strong)UITableView *myTabelView;
 @property (nonatomic , strong)NSString *userNumber;
 @property (nonatomic , strong)myTopView *topsView;
+
+@property (nonatomic, strong) NSString *qrImgStr;
 @end
 
 static NSString *reuseIndentifier = @"cell";
@@ -33,9 +35,20 @@ static NSString *Indentifier = @"TabelCell";
     [self setTopView];
     [self setMyCollectionView];
     [self setTabelViewController];
+    [QLRequest shareSuccess:^(id response) {
+        NSLog(@"%@",response);
+        if ([response[@"code"]intValue]==95000) {
+            self.qrImgStr = response[@"data"];
+        }
+    } error:^(id response) {
+        
+    }];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    LDUserInfo* u = [LDUserInfo sharedLDUserInfo];
+    [u readUserInfo];
+    NSLog(@"打印 UID%@",u.ID);
     [self.navigationController setNavigationBarHidden:YES];
     self.tabBarController.tabBar.hidden = NO;
     
@@ -232,7 +245,7 @@ static NSString *Indentifier = @"TabelCell";
             }else if (indexPath.row == 3){
                 
                 shareViewController *shareVC = [[shareViewController alloc]init];
-//                adressVC.userId = self.userNumber;
+                shareVC.qrImgStr = self.qrImgStr;
                 [self.navigationController pushViewController:shareVC animated:YES];
             }
             break;

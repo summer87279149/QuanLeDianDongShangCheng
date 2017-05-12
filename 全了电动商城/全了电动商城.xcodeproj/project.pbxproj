@@ -20,6 +20,15 @@
 		84810D5B1EBAFC4700914527 /* QLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84810D5A1EBAFC4700914527 /* QLRequest.m */; };
 		84810D601EBB084000914527 /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 84810D5D1EBB084000914527 /* NSArray+Log.m */; };
 		84810D611EBB084000914527 /* NSDictionary+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 84810D5F1EBB084000914527 /* NSDictionary+Log.m */; };
+		8494719F1EC55101001F8AD6 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8494719E1EC55101001F8AD6 /* TabBarViewController.m */; };
+		84E0389A1EC1905200C813B4 /* InviteRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E038991EC1905200C813B4 /* InviteRecordViewController.m */; };
+		84E038A81EC1930800C813B4 /* YongjinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E038A71EC1930800C813B4 /* YongjinViewController.m */; };
+		84E038AB1EC193B200C813B4 /* InviteRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E038AA1EC193B200C813B4 /* InviteRecordModel.m */; };
+		84E038AE1EC1978600C813B4 /* YongjinRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E038AC1EC1978600C813B4 /* YongjinRecordModel.m */; };
+		84E038B21EC197F000C813B4 /* GetMoneyRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E038B11EC197F000C813B4 /* GetMoneyRecordViewController.m */; };
+		84E038B51EC19A0500C813B4 /* GetMoneyRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E038B31EC19A0500C813B4 /* GetMoneyRecordModel.m */; };
+		84E038B81EC19F5D00C813B4 /* XTPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E038B71EC19F5D00C813B4 /* XTPickerView.m */; };
+		84E038BB1EC1AF3600C813B4 /* UserTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E038BA1EC1AF3600C813B4 /* UserTool.m */; };
 		BE51894DDC1329026E8C560C /* libPods-全了电动商城.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2638B051A0D57D9C9F169CED /* libPods-全了电动商城.a */; };
 		F5116B4B1E89F7E00008F57F /* homePageTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5116B491E89F7E00008F57F /* homePageTopCell.m */; };
 		F5116B4C1E89F7E00008F57F /* homePageTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5116B4A1E89F7E00008F57F /* homePageTopCell.xib */; };
@@ -210,6 +219,24 @@
 		84810D5D1EBB084000914527 /* NSArray+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Log.m"; sourceTree = "<group>"; };
 		84810D5E1EBB084000914527 /* NSDictionary+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Log.h"; sourceTree = "<group>"; };
 		84810D5F1EBB084000914527 /* NSDictionary+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Log.m"; sourceTree = "<group>"; };
+		8494719D1EC55101001F8AD6 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
+		8494719E1EC55101001F8AD6 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
+		84E038981EC1905200C813B4 /* InviteRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteRecordViewController.h; sourceTree = "<group>"; };
+		84E038991EC1905200C813B4 /* InviteRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteRecordViewController.m; sourceTree = "<group>"; };
+		84E038A61EC1930800C813B4 /* YongjinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YongjinViewController.h; sourceTree = "<group>"; };
+		84E038A71EC1930800C813B4 /* YongjinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YongjinViewController.m; sourceTree = "<group>"; };
+		84E038A91EC193B200C813B4 /* InviteRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteRecordModel.h; sourceTree = "<group>"; };
+		84E038AA1EC193B200C813B4 /* InviteRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteRecordModel.m; sourceTree = "<group>"; };
+		84E038AC1EC1978600C813B4 /* YongjinRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YongjinRecordModel.m; sourceTree = "<group>"; };
+		84E038AD1EC1978600C813B4 /* YongjinRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YongjinRecordModel.h; sourceTree = "<group>"; };
+		84E038B01EC197F000C813B4 /* GetMoneyRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyRecordViewController.h; sourceTree = "<group>"; };
+		84E038B11EC197F000C813B4 /* GetMoneyRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyRecordViewController.m; sourceTree = "<group>"; };
+		84E038B31EC19A0500C813B4 /* GetMoneyRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMoneyRecordModel.m; sourceTree = "<group>"; };
+		84E038B41EC19A0500C813B4 /* GetMoneyRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetMoneyRecordModel.h; sourceTree = "<group>"; };
+		84E038B61EC19F5D00C813B4 /* XTPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTPickerView.h; sourceTree = "<group>"; };
+		84E038B71EC19F5D00C813B4 /* XTPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTPickerView.m; sourceTree = "<group>"; };
+		84E038B91EC1AF3600C813B4 /* UserTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTool.h; sourceTree = "<group>"; };
+		84E038BA1EC1AF3600C813B4 /* UserTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTool.m; sourceTree = "<group>"; };
 		F5116B481E89F7E00008F57F /* homePageTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = homePageTopCell.h; sourceTree = "<group>"; };
 		F5116B491E89F7E00008F57F /* homePageTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = homePageTopCell.m; sourceTree = "<group>"; };
 		F5116B4A1E89F7E00008F57F /* homePageTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = homePageTopCell.xib; sourceTree = "<group>"; };
@@ -549,6 +576,39 @@
 				84810D5A1EBAFC4700914527 /* QLRequest.m */,
 			);
 			name = QLRequest;
+			sourceTree = "<group>";
+		};
+		84E038971EC1902600C813B4 /* 邀请记录 */ = {
+			isa = PBXGroup;
+			children = (
+				84E038981EC1905200C813B4 /* InviteRecordViewController.h */,
+				84E038991EC1905200C813B4 /* InviteRecordViewController.m */,
+				84E038A91EC193B200C813B4 /* InviteRecordModel.h */,
+				84E038AA1EC193B200C813B4 /* InviteRecordModel.m */,
+			);
+			name = "邀请记录";
+			sourceTree = "<group>";
+		};
+		84E038A01EC1920300C813B4 /* 佣金记录 */ = {
+			isa = PBXGroup;
+			children = (
+				84E038AD1EC1978600C813B4 /* YongjinRecordModel.h */,
+				84E038AC1EC1978600C813B4 /* YongjinRecordModel.m */,
+				84E038A61EC1930800C813B4 /* YongjinViewController.h */,
+				84E038A71EC1930800C813B4 /* YongjinViewController.m */,
+			);
+			name = "佣金记录";
+			sourceTree = "<group>";
+		};
+		84E038AF1EC197DD00C813B4 /* 提现记录 */ = {
+			isa = PBXGroup;
+			children = (
+				84E038B41EC19A0500C813B4 /* GetMoneyRecordModel.h */,
+				84E038B31EC19A0500C813B4 /* GetMoneyRecordModel.m */,
+				84E038B01EC197F000C813B4 /* GetMoneyRecordViewController.h */,
+				84E038B11EC197F000C813B4 /* GetMoneyRecordViewController.m */,
+			);
+			name = "提现记录";
 			sourceTree = "<group>";
 		};
 		CAA018DF067495E263AE3355 /* Frameworks */ = {
@@ -1296,6 +1356,9 @@
 		F5428DBD1EA995FB0059EB85 /* shareMoney */ = {
 			isa = PBXGroup;
 			children = (
+				84E038AF1EC197DD00C813B4 /* 提现记录 */,
+				84E038A01EC1920300C813B4 /* 佣金记录 */,
+				84E038971EC1902600C813B4 /* 邀请记录 */,
 				F5428DBE1EA995FB0059EB85 /* controller */,
 				F5428DBF1EA995FB0059EB85 /* model */,
 				F5428DC01EA995FB0059EB85 /* view */,
@@ -1314,6 +1377,10 @@
 				F5428DDE1EAB37780059EB85 /* ExtractCash.h */,
 				F5428DDF1EAB37780059EB85 /* ExtractCash.m */,
 				F5428DE01EAB37780059EB85 /* ExtractCash.xib */,
+				84E038B91EC1AF3600C813B4 /* UserTool.h */,
+				84E038BA1EC1AF3600C813B4 /* UserTool.m */,
+				84E038B61EC19F5D00C813B4 /* XTPickerView.h */,
+				84E038B71EC19F5D00C813B4 /* XTPickerView.m */,
 				F5428DE31EAB3FE00059EB85 /* depositAccount.h */,
 				F5428DE41EAB3FE00059EB85 /* depositAccount.m */,
 				F5428DE51EAB3FE00059EB85 /* depositAccount.xib */,
@@ -1815,6 +1882,8 @@
 				F5D6B8451E74541B007B3E06 /* SSJKitImageManager.m */,
 				F59C2F441E78EECC00A6F08A /* MD5Str.h */,
 				F59C2F451E78EECC00A6F08A /* MD5Str.m */,
+				8494719D1EC55101001F8AD6 /* TabBarViewController.h */,
+				8494719E1EC55101001F8AD6 /* TabBarViewController.m */,
 			);
 			path = other;
 			sourceTree = "<group>";
@@ -2043,7 +2112,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		52914EE94CDBFC0FE6309936 /* [CP] Embed Pods Frameworks */ = {
@@ -2091,6 +2160,7 @@
 				F5D7CA541E1B5440007F1251 /* personalInformationTableViewController.m in Sources */,
 				F5E8A5E81E729B6A007F45F4 /* GlobalVariables.m in Sources */,
 				F52A7D911E28A33E0084D2FF /* integralViewController.m in Sources */,
+				84E038B81EC19F5D00C813B4 /* XTPickerView.m in Sources */,
 				F548F5A41E94BEA7008A82BA /* slotsViewController.m in Sources */,
 				F5116B7F1E8A552A0008F57F /* topCollectionView.m in Sources */,
 				F5BE65381E6CF9C3001221BA /* myDataModel.m in Sources */,
@@ -2132,6 +2202,7 @@
 				F52A7DC81E2C7A600084D2FF /* orderRecordViewController.m in Sources */,
 				F52A7DEE1E2CAD200084D2FF /* newAdressViewController.m in Sources */,
 				F5339DF31E5813960065ADD2 /* winningModel.m in Sources */,
+				84E038B51EC19A0500C813B4 /* GetMoneyRecordModel.m in Sources */,
 				F52485731E8E462F008B6EFF /* OperatorsViewController.m in Sources */,
 				F5A0D0171E1E47BA00261E49 /* commodityTableViewCell.m in Sources */,
 				F52485881E8E7DF1008B6EFF /* AftersalesCommercial.m in Sources */,
@@ -2151,6 +2222,7 @@
 				F52A7D821E2780EF0084D2FF /* MyTableViewCell.m in Sources */,
 				F52A7D491E25D01A0084D2FF /* listTableViewCell.m in Sources */,
 				F52D92651E45B9FA00BFB3C0 /* ShopCarAnimationViewController.m in Sources */,
+				84E0389A1EC1905200C813B4 /* InviteRecordViewController.m in Sources */,
 				F5BE654A1E6E516F001221BA /* ChongZhiModel.m in Sources */,
 				F5DED5451E63D61300DE84AE /* BXHttpManager.m in Sources */,
 				F59A9A231E111B5E0049A2C1 /* UIViewController+MMDrawerController.m in Sources */,
@@ -2161,6 +2233,7 @@
 				F5339DF01E57DC170065ADD2 /* commodityModel.m in Sources */,
 				84810D5B1EBAFC4700914527 /* QLRequest.m in Sources */,
 				F5A0D00E1E1E403600261E49 /* commodityDetailedViewController.m in Sources */,
+				84E038A81EC1930800C813B4 /* YongjinViewController.m in Sources */,
 				F5BBCBF51E1626FC000C5011 /* myCollectionViewCell.m in Sources */,
 				F52A7E2E1E2DF2FE0084D2FF /* registerViewController.m in Sources */,
 				84810D581EBAFC3300914527 /* BaseRequestManager.m in Sources */,
@@ -2170,6 +2243,7 @@
 				F5BE658E1E6EC75C001221BA /* orderReadModel.m in Sources */,
 				F5DA51D61E0D0D720073DB0D /* HomePageCollectionViewCell.m in Sources */,
 				84810D601EBB084000914527 /* NSArray+Log.m in Sources */,
+				84E038AE1EC1978600C813B4 /* YongjinRecordModel.m in Sources */,
 				F59134571E55A11200A76E1B /* CAAnimation+CoreRefresh.m in Sources */,
 				F52A7DB51E2C726C0084D2FF /* LuckViewController.m in Sources */,
 				F5BE653B1E6E3AB2001221BA /* intergralModel.m in Sources */,
@@ -2178,9 +2252,12 @@
 				181EFD831E67F48400FDA7E9 /* LDSeystemInfoModel.m in Sources */,
 				F548F5C01E987DF1008A82BA /* redTableViewCell.m in Sources */,
 				F5A16D8C1E138A5D00ED4DAA /* WinningViewController.m in Sources */,
+				8494719F1EC55101001F8AD6 /* TabBarViewController.m in Sources */,
 				F5BBCBEF1E15F5CB000C5011 /* myTopView.m in Sources */,
 				84810D511EBAFB5800914527 /* XTRequestManager.m in Sources */,
+				84E038AB1EC193B200C813B4 /* InviteRecordModel.m in Sources */,
 				F5428DD31EAAF6A30059EB85 /* shareTopView.m in Sources */,
+				84E038BB1EC1AF3600C813B4 /* UserTool.m in Sources */,
 				F5BE654D1E6E7D30001221BA /* DuoBaoModel.m in Sources */,
 				F52A7E2B1E2CD9D00084D2FF /* loginViewController.m in Sources */,
 				F5624E981E1F864E00021152 /* oldAnnouncedViewController.m in Sources */,
@@ -2190,6 +2267,7 @@
 				F548F5AD1E94CA48008A82BA /* CustomerServices.m in Sources */,
 				F52A7D8A1E286E060084D2FF /* RechargeViewController.m in Sources */,
 				F52A7D421E25C2F90084D2FF /* ClearingViewController.m in Sources */,
+				84E038B21EC197F000C813B4 /* GetMoneyRecordViewController.m in Sources */,
 				F524858B1E8E7E9A008B6EFF /* aftersalesCollectionView.m in Sources */,
 				F5A0D0111E1E43B900261E49 /* commodityHeadView.m in Sources */,
 				F548F5AA1E94C62B008A82BA /* integralTurntable.m in Sources */,

@@ -39,7 +39,6 @@ static char CoreFooterViewKey;
             [self addSubview:header];
             self.header = header;
         }
-        
         // 2.设置目标和回调方法
         self.header.beginRefreshingTaget = target;
         self.header.beginRefreshingAction = action;

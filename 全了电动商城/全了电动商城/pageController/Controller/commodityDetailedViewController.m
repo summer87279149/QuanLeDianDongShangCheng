@@ -364,6 +364,7 @@ static NSString *reuseIndentifier = @"cell";
     drawerController.maximumRightDrawerWidth = 200.0;
     [[UIApplication sharedApplication].delegate window].rootViewController = drawerController;
     tabbarController.selectedIndex = 3;
+
 }
 -(void)addCar:(NSString*)typeString num:(NSString*)num{
     ///加入购物车

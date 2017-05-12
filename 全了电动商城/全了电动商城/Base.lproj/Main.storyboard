@@ -83,11 +83,11 @@
             </objects>
             <point key="canvasLocation" x="1084" y="-667"/>
         </scene>
-        <!--发现-->
+        <!--中奖晒单-->
         <scene sceneID="bbJ-Se-4Eq">
             <objects>
                 <navigationController id="fgS-iQ-t79" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="发现" image="发现3" id="Z7N-gB-qjG"/>
+                    <tabBarItem key="tabBarItem" title="中奖晒单" image="发现3" id="Z7N-gB-qjG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tSV-Xh-ekY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -138,10 +138,10 @@
             </objects>
             <point key="canvasLocation" x="-132" y="-1389"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="4CS-DU-yL5">
             <objects>
-                <tabBarController storyboardIdentifier="tabbar" id="OIC-gH-sby" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabbar" id="OIC-gH-sby" customClass="TabBarViewController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="yPg-YF-wvJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -176,11 +176,11 @@
             </objects>
             <point key="canvasLocation" x="-1370" y="28"/>
         </scene>
-        <!--众筹-->
+        <!--宝箱-->
         <scene sceneID="9Ea-OL-vk7">
             <objects>
                 <navigationController id="bbZ-JN-UCS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="众筹" image="清单4" id="UCc-7J-p7u"/>
+                    <tabBarItem key="tabBarItem" title="宝箱" image="清单4" id="UCc-7J-p7u"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wvm-2N-07u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

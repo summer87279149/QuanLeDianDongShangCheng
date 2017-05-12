@@ -27,4 +27,18 @@
  @param type +代表增，-代表减
  */
 +(void)carNumbersEdit:(NSString*)carid type:(NSString*)type success:(Success)xt_success error:(Error)xt_error;
+//分享
++(void)shareSuccess:(Success)xt_success error:(Error)xt_error;
+//邀请记录
++(void)inviteRecordSuccess:(Success)xt_success error:(Error)xt_error;
+//提现记录
++(void)getMoneyRecordSuccess:(Success)xt_success error:(Error)xt_error;
+//佣金明细
++(void)yongjinRecordSuccess:(Success)xt_success error:(Error)xt_error;
+//获取当前可提现金额
++(void)getMyListMoneySuccess:(Success)xt_success error:(Error)xt_error;
+//get提现方式
++(void)getMoneyTypeSuccess:(Success)xt_success error:(Error)xt_error;
+//提交提现请求
++(void)submitGetMoneyWithPara:(NSDictionary*)para success:(Success)xt_success error:(Error)xt_error;
 @end

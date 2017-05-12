@@ -10,6 +10,7 @@
 #import "BXHttpManager.h"
 #define REGISTER_HEIGHT (40*3)
 @interface registerViewController ()
+@property (nonatomic, strong) NSString *storeYZM;
 @property (nonatomic , strong)UITextField *phoneNumber;
 @property (nonatomic , strong)UITextField *SecurityCode;
 @property (nonatomic , strong)UITextField *password;
@@ -147,6 +148,7 @@
         NSString *urlF = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [manager POST:urlF parameters:parameter progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             LDLog(@"%@",responseObject);
+            self.storeYZM = responseObject[@"data"];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             LDLog(@"err = %@",error);
         }];
@@ -187,6 +189,7 @@
     parameters[@"userName"] = _phoneNumber.text;
     parameters[@"pass"] = _password.text;
     parameters[@"verify"] = _SecurityCode.text;
+    parameters[@"returnYzm"] = self.storeYZM;
     // 1.创建请求管理对象
     [manager POST:@"http://myadmin.all-360.com:8080/Admin/AppApi/reg" parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         LDLog(@"%@",responseObject);

@@ -184,13 +184,24 @@ static NSString *registert = @"cell";
 
 #pragma mark ----- 商品详情
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    pageGoodsModel *model = self.collectionArray[indexPath.row];
-    NSNumber * IDNums = @([model.ID integerValue]);
-    commodityDetailedViewController *commodity = [[commodityDetailedViewController alloc]init];
-    commodity.identifying = IDNums;
-    LDLog(@"%@", commodity.identifying );
+    LDUserInfo*info = [LDUserInfo sharedLDUserInfo];
+    [info readUserInfo];
+    NSLog(@"uid是:%@",info.ID);
+    if (info.ID) {
+        pageGoodsModel *model = self.collectionArray[indexPath.row];
+        NSNumber * IDNums = @([model.ID integerValue]);
+        commodityDetailedViewController *commodity = [[commodityDetailedViewController alloc]init];
+        commodity.identifying = IDNums;
+        LDLog(@"%@", commodity.identifying );
+        [self.navigationController pushViewController:commodity animated:YES];
+    }else{
+        loginViewController *vc = [loginViewController new] ;
+        vc.type = 1;
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }
+
     
-    [self.navigationController pushViewController:commodity animated:YES];
 }
 //CollectionHeadView
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -277,13 +288,10 @@ static NSString *registert = @"cell";
     session.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [session GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        //如果数组 是NSArray  这里是字典就用字典接受responseObject 数据
         NSDictionary *dataDic = responseObject;
-        //data 里面是数组  用数组接受
         NSArray *dataArray = dataDic[@"data"];
         //如果页面大于1
         if (p>1) {
-            //先将上次加载的数据保存到新的数组里
             NSMutableArray *arrayM = [NSMutableArray arrayWithArray:self.collectionArray];
             //移除原先的数据
             [self.collectionArray removeAllObjects];
@@ -375,14 +383,10 @@ static NSString *registert = @"cell";
     session.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [session GET:@"http://myadmin.all-360.com:8080/Admin/AppApi/falsh" parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        LDLog(@"%@",responseObject);
         NSDictionary *dataDic = responseObject;
         NSArray *dataArray = dataDic[@"data"];
-        LDLog(@"%@",dataArray);
         [self.scrollArray removeAllObjects];
-        //把dataArray 里面的数据放到数据源里
         [self.scrollArray addObjectsFromArray:dataArray];
-        LDLog(@"%@",self.scrollArray);
         //collectionHeadView  //
         [self setCollectionHeadView];
         

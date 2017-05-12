@@ -112,6 +112,10 @@ static NSString *reuseIndentifier = @"cell";
             NSLog(@"%@",model.did);
             [QLRequest zhiGouAddreddModify:addid andDid:model.did success:^(id response) {
                 [self.tableView headerSetState:CoreHeaderViewRefreshStateRefreshing];
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"收货地址提交完成" message:@"请耐心等待系统审核" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:nil];
+                [alertController addAction:cancelAction];
+                [self presentViewController:alertController animated:YES completion:nil];
             } error:^(id response) {
                 [ProgressHUD showError:@"修改失败请重试"];
             }];

@@ -61,6 +61,7 @@ static NSString *reuseIdentifier = @"cell";
 - (void)setTabelViewController {
     _tabelView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT)];
     _tabelView.backgroundColor = [UIColor whiteColor];
+    _tabelView.tableFooterView = [UIView new];
     _tabelView.delegate = self;
     _tabelView.dataSource = self;
     _tabelView.showsVerticalScrollIndicator = NO;

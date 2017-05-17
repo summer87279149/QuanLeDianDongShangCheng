@@ -5,7 +5,7 @@
 //  Created by 懒洋洋 on 2016/12/27.
 //  Copyright © 2016年 亮点网络. All rights reserved.
 //
-
+#import "loginViewController.h"
 #import "categoryViewController.h"
 #import "categoryTableViewCell.h"
 #import "UIViewController+MMDrawerController.h"
@@ -57,7 +57,7 @@ static NSString *reuseIdentifier = @"cell";
     [self.view addSubview:_topView];
     
     _titleLabel = [UILabel new];
-    _titleLabel.text = @"等传数据";
+    _titleLabel.text = self.title;
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     [_topView addSubview:_titleLabel];
@@ -127,16 +127,71 @@ static NSString *reuseIdentifier = @"cell";
 - (void)setJoinBoxBtn: (UIButton *)sender {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     categoryTableViewCell *cell = (categoryTableViewCell *)[self.tabelView cellForRowAtIndexPath:indexPath];
-    GoodsIDs = [NSMutableDictionary dictionary];
-    /** 点击的商品ID 🐔 状态 */
-    [GoodsIDs setValue:@"1" forKey:@"jionNum"];
-    [GoodsIDs setValue:@"1" forKey:@"status"];
-    [GoodsIDs setValue:cell.ID forKey:@"goodsID"];
-    [ShopsIDs addObject:GoodsIDs];
-    LDLog(@"%@",GoodsIDs);
-    LDLog(@"%@",ShopsIDs);
-    [self addProductsAnimation:cell.imageView dropToPoint:CGPointMake(self.view.bounds.size.width -50, self.view.layer.bounds.size.height - 40) isNeedNotification:YES];
-    [ProgressHUD showSuccess:@"成功加入购物车"];
+    NSString* userid;
+    //判断登入
+    [[LDUserInfo sharedLDUserInfo] readUserInfo];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *isLogin = [user objectForKey:@"isLogin"];
+    if ([isLogin intValue] == 0) {
+        if ([LDUserInfo sharedLDUserInfo].isLogin == YES) {
+            //读取本地数据 获取用户ID
+            [[LDUserInfo sharedLDUserInfo] readUserInfo];
+            userid = [LDUserInfo sharedLDUserInfo].ID ;
+            
+        } else {
+            //如果没登录就跳转
+            loginViewController *vc = [loginViewController new] ;
+            vc.type = 1;
+            [self.navigationController pushViewController:vc animated:YES];
+            return;
+        }
+    }else if ([isLogin intValue] != 0) {
+        userid = [user objectForKey:@"userID"];
+    }
+    NSDictionary *para = @{@"uid":userid,
+                           @"cpid":cell.ID,
+                           @"chutype":@"2",
+                           @"num":@"1"};
+    [ProgressHUD show];
+    [QLRequest submitOrder:para success:^(id response) {
+        [ProgressHUD dismiss];
+        //        NSLog(@"打印一下返回:%@",response);
+        if (!([response[@"code"] integerValue]==97100)) {
+            [ProgressHUD showError:@"加入购物车失败"];
+        }
+    } error:^(id response) {
+        [ProgressHUD dismiss];
+        [ProgressHUD showError:@"加入购物车失败"];
+    }];
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    GoodsIDs = [NSMutableDictionary dictionary];
+//    /** 点击的商品ID 🐔 状态 */
+//    [GoodsIDs setValue:@"1" forKey:@"jionNum"];
+//    [GoodsIDs setValue:@"1" forKey:@"status"];
+//    [GoodsIDs setValue:cell.ID forKey:@"goodsID"];
+//    [ShopsIDs addObject:GoodsIDs];
+//    LDLog(@"%@",GoodsIDs);
+//    LDLog(@"%@",ShopsIDs);
+//    [self addProductsAnimation:cell.imageView dropToPoint:CGPointMake(self.view.bounds.size.width -50, self.view.layer.bounds.size.height - 40) isNeedNotification:YES];
+//    [ProgressHUD showSuccess:@"成功加入购物车"];
 }
 
 #pragma mark -- 加载数据

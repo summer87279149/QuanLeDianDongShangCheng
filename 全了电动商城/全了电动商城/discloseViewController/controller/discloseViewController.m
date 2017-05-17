@@ -42,7 +42,6 @@ static NSString *reuseIdentifier = @"cell";
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     //设置是否为透明
     [self.navigationController.navigationBar setTranslucent:NO];
-    
 }
 
 #pragma mark ----- setDiscloseCollectionView 
@@ -82,7 +81,6 @@ static NSString *reuseIdentifier = @"cell";
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
- 
 }
 
 
@@ -95,7 +93,6 @@ static NSString *reuseIdentifier = @"cell";
         //数据刷新中
         [self.discloseCollection headerSetState:CoreHeaderViewRefreshStateRefreshing];
     });
-    
 }
 
 #pragma mark  动态顶部刷新
@@ -182,87 +179,6 @@ static NSString *reuseIdentifier = @"cell";
         LDLog(@"失败 = %@",error);
     }];
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

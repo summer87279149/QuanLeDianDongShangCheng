@@ -91,6 +91,7 @@ static NSString *reuseIndentifier = @"cell";
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 20) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.tableFooterView = [UIView new];
     [_tableView registerNib:[UINib nibWithNibName:@"luckTableViewCell" bundle:nil] forCellReuseIdentifier:reuseIndentifier];
     _tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tableView];
@@ -108,6 +109,7 @@ static NSString *reuseIndentifier = @"cell";
     cell.winStatus.textColor = [UIColor redColor];
     luckModel *model = self.dataModelArray[indexPath.row];
     cell.model = model;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

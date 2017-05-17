@@ -111,6 +111,7 @@ static NSString *reuseIdentifier = @"cell";
     _GoodsSid = model.ID;
     categoryViewController *cateVC = [[categoryViewController alloc]init];
     cateVC.classifyNum = self.GoodsSid;
+    cateVC.title = model.name;
     [self presentViewController:cateVC animated:YES completion:nil];
     
 }

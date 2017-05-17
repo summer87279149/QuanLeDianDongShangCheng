@@ -90,6 +90,7 @@ static NSString *reuseIndentifier = @"cell";
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 20) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.tableFooterView = [UIView new];
     [_tableView registerNib:[UINib nibWithNibName:@"PartakeTableViewCell" bundle:nil] forCellReuseIdentifier:reuseIndentifier];
     _tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_tableView];
@@ -105,6 +106,7 @@ static NSString *reuseIndentifier = @"cell";
     PartakeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIndentifier forIndexPath:indexPath];
     DuoBaoModel *model = self.dataModelArray[indexPath.row];
     cell.model = model;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -118,6 +120,7 @@ static NSString *reuseIndentifier = @"cell";
     session.responseSerializer = [AFJSONResponseSerializer serializer];
     session.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
     [session GET:urlStr parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@",responseObject);
         //如果数组 是NSArray  这里是字典就用字典接受responseObject 数据
         NSDictionary *dataDic = responseObject;
         //data 里面是数组  用数组接受

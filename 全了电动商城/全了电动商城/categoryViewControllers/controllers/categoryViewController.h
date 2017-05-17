@@ -11,4 +11,6 @@
 @interface categoryViewController : ShopCarAnimationViewController
 /** 上个界面传来的分类sid */
 @property (nonatomic , strong)NSString *classifyNum;
+
+@property (nonatomic , strong)NSString *title;
 @end

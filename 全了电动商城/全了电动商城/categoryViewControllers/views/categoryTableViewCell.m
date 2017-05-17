@@ -29,13 +29,6 @@
     self.progress.progress = strOne / strTwo;
     self.ID = model.ID;
     
-    
-    
-
-    /** 压缩 */
-    [SSJKitImageManager compressImage:self.images.image limitSize:512*1024*8 maxSide:100 completion:^(NSData *data) {
-        NSLog(@"In: %f", data.length/1024/8.0);
-    }];
     NSString *imageStr = [NSString stringWithFormat:@"%@%@" , ImageUrl , model.suoluetu];
     [self.images sd_setImageWithURL:[NSURL URLWithString:imageStr]];
 }

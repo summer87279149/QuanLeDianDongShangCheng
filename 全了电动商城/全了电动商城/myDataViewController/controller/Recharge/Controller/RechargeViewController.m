@@ -311,10 +311,7 @@ int payMoney = 20;
             [[UIApplication sharedApplication] openURL:url];
             
         }];
-        UIAlertAction *WeiChartAction = [UIAlertAction actionWithTitle:@"微信支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            
-            
+        UIAlertAction *WeiChartAction = [UIAlertAction actionWithTitle:@"支付宝支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             //取本地信息
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             NSString *isLogin = [user objectForKey:@"isLogin"];
@@ -368,12 +365,7 @@ int payMoney = 20;
                     LDLog(@"error = %@",error);
                 }];
             }
-            
-            
-            
-            
-            
-            
+
         }];
         
         UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];

@@ -5,7 +5,7 @@
 //  Created by 懒洋洋 on 2017/1/16.
 //  Copyright © 2017年 亮点网络. All rights reserved.
 //
-
+#import "baskOrderViewController.h"
 #import "LuckViewController.h"
 #import "luckModel.h"
 #import "luckTableViewCell.h"
@@ -118,10 +118,18 @@ static NSString *reuseIndentifier = @"cell";
 //晒单跳转回去 并且传值
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     luckModel *model = self.dataModelArray[indexPath.row];
-
-    self.block(model.name,model.ID,model.cpqs,model.zhonghao);
+//    if (self.block) {
+//        self.block(model.name,model.ID,model.cpqs,model.zhonghao);
+//    }
     
-    [self.navigationController popViewControllerAnimated:YES];
+    //什么乱七八糟的东西，fuck
+    baskOrderViewController *vc = [[baskOrderViewController alloc]init];
+    vc.uid = [LDUserInfo sharedLDUserInfo].ID;
+    vc.shopName = model.name;
+    vc.cpid = model.ID;
+    vc.qihao = model.cpqs;
+    vc.zhongh = model.zhonghao;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark -- 加载数据

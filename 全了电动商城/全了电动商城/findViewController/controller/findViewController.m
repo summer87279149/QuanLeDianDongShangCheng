@@ -46,7 +46,7 @@ static NSString *reuseIdentifier = @"cell";
 #pragma mark - 创建导航栏
 - (void)configNavigation {
     
-    self.title = @"中奖晒单";
+    self.title = @"发现";
     //导航添加背景颜色
     [self.navigationController.navigationBar setBarTintColor:kColor_RGB(217, 57, 84)];
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];

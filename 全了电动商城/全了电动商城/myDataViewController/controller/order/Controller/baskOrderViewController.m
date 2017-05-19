@@ -5,7 +5,7 @@
 //  Created by 懒洋洋 on 2017/1/14.
 //  Copyright © 2017年 亮点网络. All rights reserved.
 //
-
+#import "MD5Str.h"
 #import "baskOrderViewController.h"
 #import "AllMyController.pch"
 @interface baskOrderViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -60,7 +60,7 @@
 - (void)setViewController {
     /** 获奖 信息 名称 */
     UIButton *titleBtn = [UIButton new];
-    [titleBtn setTitle:@"我要晒单" forState:UIControlStateNormal];
+    [titleBtn setTitle:@" " forState:UIControlStateNormal];
     [titleBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     titleBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [titleBtn addTarget:self action:@selector(setZhongJiangVC) forControlEvents:UIControlEventTouchUpInside];
@@ -69,7 +69,7 @@
    
 
     _nameLabel = [UILabel new];
-    _nameLabel.text = @"您还未中奖";
+//    _nameLabel.text = @"您还未中奖";
     _nameLabel.textColor = [UIColor redColor];
     _nameLabel.font = [UIFont systemFontOfSize:13];
     [self.view addSubview:_nameLabel];
@@ -182,18 +182,16 @@
 }
 /** 保存图片成功上传服务器 并且返回上个界面 */
 - (void)setSaveImage {
-    BXHttpManager *manager = [BXHttpManager manager];
-    NSString *urlStr = [NSString stringWithFormat:@"http://myadmin.all-360.com:8080/Admin/AppApi/saiDan/uid/%@/cpid/%@/qihao/%@/zhongh/%@/miaoshu/%@",self.uid,self.cpid,self.qihao,self.zhongh,_winTextField];
-
-    /** 调用方法上传图片 */
-    [manager PostImagesToServer:urlStr dicPostParams:nil imageArray:@[_orderImageView.image] file:@[@"file"] imageName:@[@"miaoshu"] Success:^(id responseObject) {
-        LDLog(@"%@====",responseObject);
-        [ProgressHUD showSuccess:@"上传成功"];
-    } andFailure:^(NSError *error) {
-        [ProgressHUD showError:@"上传失败"];
-        LDLog(@"error  ====%@ ",error);
-    }];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (_orderImageView.image) {
+        NSString *strr = [NSString stringWithFormat:@"http://myadmin.all-360.com:8080/Admin/AppApi/saiDan/id/%@",self.cpid];
+        [XTRequestManager POSTJSON:strr parameters:@{@"miaoshu":_winTextField.text,@"suoluetu":[MD5Str base64EncodingWithData:UIImagePNGRepresentation(_orderImageView.image)]} responseSeializerType:NHResponseSeializerTypeDefault success:^(id responseObject) {
+            [ProgressHUD showSuccess:responseObject[@"message"]];
+            [self.navigationController popViewControllerAnimated:YES];
+        } failure:^(NSError *error) {
+        }];
+    }else{
+        [ProgressHUD showError:@"信息不全"];
+    }
 }
 /** 跳转到我的晒单详情界面 */
 - (void)gotoLookOrderViewController {

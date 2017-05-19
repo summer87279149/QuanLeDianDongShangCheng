@@ -5,7 +5,7 @@
 //  Created by 懒洋洋 on 2017/1/16.
 //  Copyright © 2017年 亮点网络. All rights reserved.
 //
-
+#import "JPUSHService.h"
 #import "loginViewController.h"
 #import "registerViewController.h"
 #import <UMSocialCore/UMSocialCore.h>
@@ -309,6 +309,10 @@
                     [ProgressHUD showSuccess:@"登录成功"];
                     //把请求返回的数据 储存起来 (储存用户数据)?
                     [LDUserInfo sharedLDUserInfo].ID = responseObject[@"data"][@"userId"];
+                    
+                    [JPUSHService setTags:nil alias:[LDUserInfo sharedLDUserInfo].ID fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                        
+                    }];
                     [LDUserInfo sharedLDUserInfo].isLogin = YES;
                     [[LDUserInfo sharedLDUserInfo] saveUsrtInfo];
                     /** 后台返回用户的ID 和名字  */
@@ -351,7 +355,9 @@
                 [LDUserInfo sharedLDUserInfo].isLogin = YES;
                 [LDUserInfo sharedLDUserInfo].oldIsLogin = YES;
                 [[LDUserInfo sharedLDUserInfo] saveUsrtInfo];
-
+                [JPUSHService setTags:nil alias:[LDUserInfo sharedLDUserInfo].ID fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                    
+                }];
                 [self.navigationController popViewControllerAnimated:YES];
             } else if ([code intValue] != 6200 ) {
                 [ProgressHUD showError:@"登录失败"];
@@ -420,6 +426,9 @@
             [LDUserInfo sharedLDUserInfo].isLogin = YES;
             [[LDUserInfo sharedLDUserInfo] saveUsrtInfo];
             [self setUserDefauts];
+            [JPUSHService setTags:nil alias:[LDUserInfo sharedLDUserInfo].ID fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias) {
+                
+            }];
             [self.navigationController popViewControllerAnimated:YES];
         } else if ([code intValue] == 6004 ) {
             [ProgressHUD showError:@"账号或密码错误"];

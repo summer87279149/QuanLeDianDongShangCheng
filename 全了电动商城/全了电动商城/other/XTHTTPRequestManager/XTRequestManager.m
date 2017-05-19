@@ -87,34 +87,23 @@ responseSeializerType:(NHResponseSeializerType)type
      success:(void (^)(id))success
      failure:(void (^)(NSError *))failure {
     if (XTNetworkStatus==AFNetworkReachabilityStatusNotReachable) {
-        //        [MBProgressHUD showMessage:@"无网络" toView:[UIApplication sharedApplication].keyWindow];
         return;
     }
     AFHTTPSessionManager *manager = [AFHTTPSessionManager sharedManager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];    
-    // 如果不是JSON 或者 不是Default 才设置解析器类型
     if (type != NHResponseSeializerTypeJSON && type != NHResponseSeializerTypeDefault) {
         manager.responseSerializer = [self responseSearalizerWithSerilizerType:type];
     }
-    //  https证书设置
-    
     AFSecurityPolicy *policy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
     policy.allowInvalidCertificates = YES;
     manager.securityPolicy  = policy;
-    
-    
     [manager POST:URLString parameters:parameters progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         if (success) {
             success(responseObject);
         }
-        //        NSLog(@"%@", responseObject);
-        
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        
-        // 失败
         if (failure) {
             failure(error);
-            NSLog(@"post请求失败统一返回错误信息:%@",error);
         }
     }];
 }
@@ -199,6 +188,39 @@ constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block
         
     }];
 }
+
+// POST请求 上传数据
++ (void)POSTFileJSON:(NSString *)URLString
+  parameters:(id)parameters
+responseSeializerType:(NHResponseSeializerType)type
+constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block
+     success:(void (^)(id))success
+     failure:(void (^)(NSError *))failure {
+    if (XTNetworkStatus==AFNetworkReachabilityStatusNotReachable) {
+        return;
+    }
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager sharedManager];
+     manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    if (type != NHResponseSeializerTypeJSON && type != NHResponseSeializerTypeDefault) {
+        manager.responseSerializer = [self responseSearalizerWithSerilizerType:type];
+    }
+    
+    [manager POST:URLString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        if (block) {
+            block(formData);
+        }
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+}
+
 
 
 /**

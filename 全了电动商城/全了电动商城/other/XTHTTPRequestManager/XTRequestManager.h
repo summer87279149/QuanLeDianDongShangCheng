@@ -80,5 +80,21 @@ constructingBodyWithBlock:(void (^)(id<AFMultipartFormData> formData))block
      success:(void (^)(id responseObject))success
      failure:(void (^)(NSError *error))failure;
 
+/**
+ post json 数据
+
+ @param URLString <#URLString description#>
+ @param parameters <#parameters description#>
+ @param type <#type description#>
+ @param block <#block description#>
+ @param success <#success description#>
+ @param failure <#failure description#>
+ */
++ (void)POSTFileJSON:(NSString *)URLString
+          parameters:(id)parameters
+responseSeializerType:(NHResponseSeializerType)type
+constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block
+             success:(void (^)(id))success
+             failure:(void (^)(NSError *))failure;
 + (void)cancelAllRequests;
 @end

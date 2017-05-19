@@ -83,11 +83,11 @@
             </objects>
             <point key="canvasLocation" x="1084" y="-667"/>
         </scene>
-        <!--中奖晒单-->
+        <!--发现-->
         <scene sceneID="bbJ-Se-4Eq">
             <objects>
                 <navigationController id="fgS-iQ-t79" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="中奖晒单" image="发现3" id="Z7N-gB-qjG"/>
+                    <tabBarItem key="tabBarItem" title="发现" image="发现3" id="Z7N-gB-qjG"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tSV-Xh-ekY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

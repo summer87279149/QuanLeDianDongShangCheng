@@ -5,7 +5,7 @@
 //  Created by 懒洋洋 on 2016/12/30.
 //  Copyright © 2016年 亮点网络. All rights reserved.
 //
-
+#import "LuckViewController.h"
 #import "myViewController.h"
 #import "myTopView.h"
 #import "myCollectionModel.h"
@@ -136,9 +136,13 @@ static NSString *Indentifier = @"TabelCell";
             break;
         case 2:
         {
-            baskOrderViewController *baskVC = [[baskOrderViewController alloc]init];
-            baskVC.uid = self.userNumber;
+            
+            LuckViewController *baskVC = [[LuckViewController alloc]init];
+            baskVC.userID = [LDUserInfo sharedLDUserInfo].ID;
             [self.navigationController pushViewController:baskVC animated:YES];
+//            baskOrderViewController *baskVC = [[baskOrderViewController alloc]init];
+//            baskVC.uid = self.userNumber;
+//            [self.navigationController pushViewController:baskVC animated:YES];
         }
             break;
     }

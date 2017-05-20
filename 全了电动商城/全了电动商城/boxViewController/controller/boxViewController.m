@@ -95,7 +95,7 @@ static NSString *reuseIdentifier = @"cell";
     [_orderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _orderBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [_orderBtn setBackgroundImage:[UIImage imageNamed:@"提交订单"] forState:UIControlStateNormal];
-    [_orderBtn addTarget:self action:@selector(setOrderBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [_orderBtn addTarget:self action:@selector(SBsetOrderBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_footView addSubview:_orderBtn];
     
     [_bottomLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -122,34 +122,37 @@ static NSString *reuseIdentifier = @"cell";
             level = tempDic[@"level"];
         }
         //        NSLog(@"只为拿到level：%@",dataDic);
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
     }];
 }
 #pragma mark ----  点击提交定单
-- (void)setOrderBtn: (UIButton *)sender {
-    NSMutableArray *arr = [NSMutableArray array];
-    for (goodsDataModel *model in self.dataModelArray) {
-        NSDictionary*dic = @{@"uid":[LDUserInfo sharedLDUserInfo].ID ,
-                             @"cpid":model.cpid,
-                             @"cpqs":model.dangqishu,
-                             @"chanpindanjia":model.danjia,
-                             @"shuliang":model.shopsNum,
-                             @"chutype":model.status,
-                             @"abot":level,
-                             @"jifen":model.score_price
-                             };
-        [arr addObject:dic];
+- (void)SBsetOrderBtn: (UIButton *)sender {
+    if (self.dataModelArray.count>0) {
+        NSMutableArray *arr = [NSMutableArray array];
+        for (goodsDataModel *model in self.dataModelArray) {
+            NSDictionary*dic = @{@"uid":[LDUserInfo sharedLDUserInfo].ID ,
+                                 @"cpid":model.cpid,
+                                 @"cpqs":model.dangqishu,
+                                 @"chanpindanjia":model.danjia,
+                                 @"shuliang":model.shopsNum,
+                                 @"chutype":model.status,
+                                 @"abot":level,
+                                 @"jifen":model.score_price
+                                 };
+            NSLog(@"dic=%@",dic);
+            [arr addObject:dic];
+        }
+        NSDictionary *para = @{@"dingdan":arr};
+        [QLRequest orderRuKuWithPara:para success:^(id response) {
+            NSString *orderNumber = response[@"data"];
+            payListViewController *vc = [payListViewController new];
+            vc.orderNum = orderNumber;
+            [self.navigationController pushViewController:vc animated:YES];
+        } error:^(id response) {
+            
+        }];
     }
-    
-    NSDictionary *para = @{@"dingdan":arr};
-    [QLRequest orderRuKuWithPara:para success:^(id response) {
-        NSString *orderNumber = response[@"data"];
-        payListViewController *vc = [payListViewController new];
-        vc.orderNum = orderNumber;
-        [self.navigationController pushViewController:vc animated:YES];
-    } error:^(id response) {
-        
-    }];
     
     
 }
@@ -264,9 +267,9 @@ static NSString *reuseIdentifier = @"cell";
             userid = [LDUserInfo sharedLDUserInfo].ID ;
             
         } else {
-            loginViewController *vc = [loginViewController new] ;
-            vc.type = 1;
-            [self.navigationController pushViewController:vc animated:YES];
+//            loginViewController *vc = [loginViewController new] ;
+//            vc.type = 1;
+//            [self.navigationController pushViewController:vc animated:YES];
             return nil;
         }
     }else if ([isLogin intValue] != 0) {
@@ -277,7 +280,7 @@ static NSString *reuseIdentifier = @"cell";
 }
 -(void)request{
     NSString* result = [self judgeLogin];
-    if (result) {
+    if (result!=nil) {
         [ProgressHUD show];
         [QLRequest queryCarList:result success:^(id response) {
             [ProgressHUD dismiss];

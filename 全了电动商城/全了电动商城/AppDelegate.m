@@ -5,7 +5,7 @@
 //  Created by 懒洋洋 on 16/12/20.
 //  Copyright © 2016年 亮点网络. All rights reserved.
 //
-
+#import "UMMobClick/MobClick.h"
 #import "AppDelegate.h"
 #import "sideslipViewController.h"
 #import "homePageViewController.h"
@@ -66,6 +66,10 @@ extern NSMutableArray *ShopsIDs;
     [self.window makeKeyAndVisible];
     
     /** 友盟 */
+    UMConfigInstance.appKey = @"587ef9a45312dd60e5001d75";
+    UMConfigInstance.channelId = @"App Store";
+    UMConfigInstance.bCrashReportEnabled = YES;
+    [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     //打开调试日志
     [[UMSocialManager defaultManager] openLog:YES];
     

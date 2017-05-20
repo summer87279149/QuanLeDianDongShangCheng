@@ -35,4 +35,5 @@ singleton_interface(LDUserInfo)
 - (void)saveUsrtInfo;
 /** 读取用户信息 */
 - (void)readUserInfo;
+-(void)logout;
 @end

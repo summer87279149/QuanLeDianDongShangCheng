@@ -265,18 +265,13 @@ static NSString *reuseIdentifier = @"cell";
         if ([LDUserInfo sharedLDUserInfo].isLogin == YES) {
             [[LDUserInfo sharedLDUserInfo] readUserInfo];
             userid = [LDUserInfo sharedLDUserInfo].ID ;
-            
         } else {
-//            loginViewController *vc = [loginViewController new] ;
-//            vc.type = 1;
-//            [self.navigationController pushViewController:vc animated:YES];
             return nil;
         }
     }else if ([isLogin intValue] != 0) {
         userid = [user objectForKey:@"userID"];
     }
     return userid;
-    
 }
 -(void)request{
     NSString* result = [self judgeLogin];

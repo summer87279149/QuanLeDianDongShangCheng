@@ -22,6 +22,20 @@ singleton_implementation(LDUserInfo)
     [defaults setObject:self.ID forKey:@"userID"];
     [defaults synchronize];
 }
+-(void)logout{
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+    [defaults setObject:nil forKey:@"userName"];
+    [defaults setObject:nil forKey:@"userPassword"];
+    [defaults setBool:NO forKey:@"isLogin"];
+    [defaults setBool:NO forKey:@"oldIsLogin"];
+    [defaults setObject:nil forKey:@"userID"];
+    [defaults synchronize];
+    self.userName=nil;
+    self.userPassword=nil;
+    self.isLogin=NO;
+    self.ID=nil;
+    self.userIntegral=nil;
+}
 /** 读取用户信息 */
 - (void)readUserInfo {
     NSUserDefaults *defaults = [[NSUserDefaults alloc] init];

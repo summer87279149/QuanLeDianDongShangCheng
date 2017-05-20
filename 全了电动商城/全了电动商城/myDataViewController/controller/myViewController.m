@@ -46,30 +46,35 @@ static NSString *Indentifier = @"TabelCell";
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    LDUserInfo* u = [LDUserInfo sharedLDUserInfo];
-    [u readUserInfo];
-    NSLog(@"打印 UID%@",u.ID);
     [self.navigationController setNavigationBarHidden:YES];
     self.tabBarController.tabBar.hidden = NO;
     
-    //取本地信息
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSString *isLogin = [user objectForKey:@"isLogin"];
-    if ([isLogin intValue] == 0) {
-        if ([LDUserInfo sharedLDUserInfo].isLogin == YES) {
-            //读取本地数据 获取用户ID
-            [[LDUserInfo sharedLDUserInfo] readUserInfo];
-            self.userNumber = [LDUserInfo sharedLDUserInfo].ID ;
-            
-        } else {
-            //如果没登录就跳转
-            [self.navigationController pushViewController:[loginViewController new] animated:YES];
-        }
-    }else if ([isLogin intValue] != 0) {
-        self.userNumber = [user objectForKey:@"userID"];
+    [[LDUserInfo sharedLDUserInfo]readUserInfo];
+    if([LDUserInfo sharedLDUserInfo].ID){
+        self.userNumber = [LDUserInfo sharedLDUserInfo].ID ;
+        [self setMyDatas];
+    }else{
+        [self.navigationController pushViewController:[loginViewController new] animated:YES];
     }
     
-    [self setMyDatas];
+//    //取本地信息
+//    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+//    NSString *isLogin = [user objectForKey:@"isLogin"];
+//    if ([isLogin intValue] == 0) {
+//        if ([LDUserInfo sharedLDUserInfo].isLogin == YES) {
+//            //读取本地数据 获取用户ID
+//            [[LDUserInfo sharedLDUserInfo] readUserInfo];
+//            self.userNumber = [LDUserInfo sharedLDUserInfo].ID ;
+//            
+//        } else {
+//            //如果没登录就跳转
+//            [self.navigationController pushViewController:[loginViewController new] animated:YES];
+//        }
+//    }else if ([isLogin intValue] != 0) {
+//        self.userNumber = [user objectForKey:@"userID"];
+//    }
+//    
+    
 }
 
 #pragma  mark ----- setTopView
@@ -271,7 +276,7 @@ static NSString *Indentifier = @"TabelCell";
 //登录界面
 - (void)gotoLoginViewController {
     [LDUserInfo sharedLDUserInfo].isLogin = NO;
-    [[LDUserInfo sharedLDUserInfo] saveUsrtInfo];
+    [[LDUserInfo sharedLDUserInfo] logout];
     [self.navigationController pushViewController:[loginViewController new] animated:YES];
 }
 

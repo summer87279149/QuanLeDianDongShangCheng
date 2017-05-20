@@ -106,7 +106,7 @@ static NSString *reuseIdentifier = @"cell";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     categoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-    [cell.boxBtn addTarget:self action:@selector(setJoinBoxBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.boxBtn addTarget:self action:@selector(SBsetJoinBoxBtn:) forControlEvents:UIControlEventTouchUpInside];
     cell.boxBtn.tag = indexPath.row;
     pageGoodsModel *model = self.dataModelArray[indexPath.row];
     cell.model = model;
@@ -124,74 +124,33 @@ static NSString *reuseIdentifier = @"cell";
     [self presentViewController:nav animated:YES completion:nil];
 }
 #pragma mark ------ 加入购物车动画
-- (void)setJoinBoxBtn: (UIButton *)sender {
+- (void)SBsetJoinBoxBtn: (UIButton *)sender {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
     categoryTableViewCell *cell = (categoryTableViewCell *)[self.tabelView cellForRowAtIndexPath:indexPath];
     NSString* userid;
     //判断登入
     [[LDUserInfo sharedLDUserInfo] readUserInfo];
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSString *isLogin = [user objectForKey:@"isLogin"];
-    if ([isLogin intValue] == 0) {
-        if ([LDUserInfo sharedLDUserInfo].isLogin == YES) {
-            //读取本地数据 获取用户ID
-            [[LDUserInfo sharedLDUserInfo] readUserInfo];
-            userid = [LDUserInfo sharedLDUserInfo].ID ;
-            
-        } else {
-            //如果没登录就跳转
-            loginViewController *vc = [loginViewController new] ;
-            vc.type = 1;
-            [self.navigationController pushViewController:vc animated:YES];
-            return;
-        }
-    }else if ([isLogin intValue] != 0) {
-        userid = [user objectForKey:@"userID"];
-    }
-    NSDictionary *para = @{@"uid":userid,
-                           @"cpid":cell.ID,
-                           @"chutype":@"2",
-                           @"num":@"1"};
-    [ProgressHUD show];
-    [QLRequest submitOrder:para success:^(id response) {
-        [ProgressHUD dismiss];
-        //        NSLog(@"打印一下返回:%@",response);
-        if (!([response[@"code"] integerValue]==97100)) {
+    if ([LDUserInfo sharedLDUserInfo].ID) {
+        userid = [LDUserInfo sharedLDUserInfo].ID ;
+        NSDictionary *para = @{@"uid":userid,
+                               @"cpid":cell.ID,
+                               @"chutype":@"2",
+                               @"num":@"1"};
+        [ProgressHUD show];
+        [QLRequest submitOrder:para success:^(id response) {
+            [ProgressHUD dismiss];
+            if (!([response[@"code"] integerValue]==97100)) {
+                [ProgressHUD showError:@"加入购物车失败"];
+            }
+        } error:^(id response) {
+            [ProgressHUD dismiss];
             [ProgressHUD showError:@"加入购物车失败"];
-        }
-    } error:^(id response) {
-        [ProgressHUD dismiss];
-        [ProgressHUD showError:@"加入购物车失败"];
-    }];
-
+        }];
+    }else{
+        [ProgressHUD showError:@"未登入"];
+        return;
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    GoodsIDs = [NSMutableDictionary dictionary];
-//    /** 点击的商品ID 🐔 状态 */
-//    [GoodsIDs setValue:@"1" forKey:@"jionNum"];
-//    [GoodsIDs setValue:@"1" forKey:@"status"];
-//    [GoodsIDs setValue:cell.ID forKey:@"goodsID"];
-//    [ShopsIDs addObject:GoodsIDs];
-//    LDLog(@"%@",GoodsIDs);
-//    LDLog(@"%@",ShopsIDs);
-//    [self addProductsAnimation:cell.imageView dropToPoint:CGPointMake(self.view.bounds.size.width -50, self.view.layer.bounds.size.height - 40) isNeedNotification:YES];
-//    [ProgressHUD showSuccess:@"成功加入购物车"];
 }
 
 #pragma mark -- 加载数据

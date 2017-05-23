@@ -160,19 +160,19 @@
     [_registerAccountBtn setTitle:@"注册用户" forState:UIControlStateNormal];
     _registerAccountBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     [_registerAccountBtn setTitleColor:kColor_RGB(217, 57, 84) forState:UIControlStateNormal];
-    [_registerAccountBtn setBackgroundImage:[UIImage imageNamed:@"加入宝箱"] forState:UIControlStateNormal];
+//    [_registerAccountBtn setBackgroundImage:[UIImage imageNamed:@"加入宝箱"] forState:UIControlStateNormal];
     [_registerAccountBtn addTarget:self action:@selector(gotoRegisterViewController) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_registerAccountBtn];
     
     [_loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(loginView.mas_bottom).offset(50);
+        make.top.mas_equalTo(loginView.mas_bottom).offset(20);
         make.left.mas_equalTo(50);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 100, 40));
     }];
     
     [_registerAccountBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_loginBtn.mas_bottom).offset(30);
-        make.left.mas_equalTo(20);
+        make.top.mas_equalTo(_loginBtn.mas_bottom).offset(10);
+        make.right.mas_equalTo(_loginBtn);
         make.size.mas_equalTo(CGSizeMake(80, 30));
     }];
     
@@ -217,18 +217,18 @@
     [self.view addSubview:explainLineView];
     
     [explainLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-180);
+        make.bottom.mas_equalTo(-150);
         make.left.mas_equalTo((SCREEN_WIDTH - 130)/2);
         make.size.mas_equalTo(CGSizeMake(130, 30));
     }];
     [explainLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-193);
+        make.bottom.mas_equalTo(-163);
         make.right.mas_equalTo(explainLabel.mas_left).offset(-5);
         make.left.mas_equalTo(10);
         make.height.mas_equalTo(1);
     }];
     [explainLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-193);
+        make.bottom.mas_equalTo(-163);
         make.left.mas_equalTo(explainLabel.mas_right).offset(5);
         make.right.mas_equalTo(-10);
         make.height.mas_equalTo(1);

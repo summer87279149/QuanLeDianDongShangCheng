@@ -164,7 +164,6 @@ static NSString *reuseIndentifier = @"cell";
 }
 #pragma  mark ------ 提交订单
 - (void)setSubmitListBtn {
-
     //发送数据
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -237,7 +236,6 @@ int allJiFen = 0;
     self.CurrentTime= dateTime;
     NSLog(@"当前时间是===%@",_CurrentTime);
     
-
     long x = arc4random() % 10009999;
     long y = arc4random() % 1099;
     _order = [NSString stringWithFormat:@"%@%ld%ld",_CurrentTime,x,y];

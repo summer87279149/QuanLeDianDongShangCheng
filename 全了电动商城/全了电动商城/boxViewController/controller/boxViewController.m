@@ -68,6 +68,7 @@ static NSString *reuseIdentifier = @"cell";
     [super viewWillAppear:animated];
     [self request];
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
@@ -121,8 +122,6 @@ static NSString *reuseIdentifier = @"cell";
         for (NSDictionary *tempDic in dataArray) {
             level = tempDic[@"level"];
         }
-        //        NSLog(@"只为拿到level：%@",dataDic);
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
     }];
 }
@@ -153,8 +152,6 @@ static NSString *reuseIdentifier = @"cell";
             
         }];
     }
-    
-    
 }
 #pragma mark ----- setBoxCollectionView
 - (void)setBoxCollectionView {
@@ -332,9 +329,9 @@ static NSString *reuseIdentifier = @"cell";
     _nilImageView.image = [UIImage imageNamed:@"空箱子"];
     [_nilView addSubview:_nilImageView];
     [_nilImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(100);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 400));
-        make.left.mas_equalTo(0);
+        make.top.mas_equalTo(80);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH/1.2, 400/1.2));
+        make.left.mas_equalTo(SCREEN_WIDTH*0.1);
     }];
 }
 

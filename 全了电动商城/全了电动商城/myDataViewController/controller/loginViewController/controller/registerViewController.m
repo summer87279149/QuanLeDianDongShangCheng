@@ -213,11 +213,6 @@
         LDLog(@"注册失败 = %@",error);
         [ProgressHUD showError:@"注册失败"];
     }];
-    
-    
-    
-  
-
 }
 
 
@@ -267,8 +262,6 @@
             return NO;
         }
     }
-    
-    
 }
 
 

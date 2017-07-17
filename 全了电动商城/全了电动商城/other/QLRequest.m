@@ -29,6 +29,17 @@
     }
     
 }
++(void)shareTotalSuccess:(Success)xt_success error:(Error)xt_error{
+    LDUserInfo* user = [LDUserInfo sharedLDUserInfo];
+    [user readUserInfo];
+    if (user.ID) {
+        [XTRequestManager GET:@"http://myadmin.all-360.com:8080/Admin/AppApi/shareTongji" parameters:@{@"uid":user.ID} responseSeializerType:NHResponseSeializerTypeDefault success:^(id responseObject) {
+            xt_success(responseObject);
+        } failure:^(NSError *error) {
+            xt_error(error);
+        }];
+    }
+}
 +(void)submitOrder:(NSDictionary*)para success:(Success)xt_success error:(Error)xt_error{
     [XTRequestManager GET:XT_REQUEST_URL(@"/Admin/AppApi/shopCart") parameters:para responseSeializerType:NHResponseSeializerTypeDefault success:^(id responseObject) {
         xt_success(responseObject);

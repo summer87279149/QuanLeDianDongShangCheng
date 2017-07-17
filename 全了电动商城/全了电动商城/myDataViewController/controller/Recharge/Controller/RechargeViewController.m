@@ -52,7 +52,10 @@ int payMoney = 20;
     [super viewWillAppear:animated];
     self.tabBarController.tabBar.hidden = YES;
     [self.navigationController setNavigationBarHidden:NO];
+    [[LDUserInfo sharedLDUserInfo]readUserInfo];
+    self.userUID = [LDUserInfo sharedLDUserInfo].ID;
     [self setWeiXinPayStatus];
+    
 }
 #pragma mark - 创建导航栏
 - (void)configNavigation {
@@ -88,7 +91,7 @@ int payMoney = 20;
     [headView addSubview:headLabel];
     
     UILabel *payLabel = [UILabel new];
-    payLabel.text = @"微信支付";
+    payLabel.text = @"支付宝支付";
     payLabel.textColor = [UIColor grayColor];
     payLabel.font = [UIFont systemFontOfSize:13];
     [self.view addSubview:payLabel];
@@ -293,9 +296,12 @@ int payMoney = 20;
     if ([_WeiXinStatus intValue] == 0) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction *ZFBAction = [UIAlertAction actionWithTitle:@"支付宝支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
             NSString *urlStr = [NSString stringWithFormat:@"http://www.all-360.com/alipay/wappay/recharge.php?amount=%d&uid=%@",payMoney,self.userUID];
+            
             NSURL *url = [ [ NSURL alloc ] initWithString:urlStr ];
             [[UIApplication sharedApplication] openURL:url];
+            [self.navigationController popViewControllerAnimated:YES];
         }];
         
         UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -309,7 +315,7 @@ int payMoney = 20;
             NSString *urlStr = [NSString stringWithFormat:@"http://www.all-360.com/alipay/wappay/recharge.php?amount=%d&uid=%@",payMoney,self.userUID];
             NSURL *url = [ [ NSURL alloc ] initWithString:urlStr ];
             [[UIApplication sharedApplication] openURL:url];
-            
+             [self.navigationController popViewControllerAnimated:YES];
         }];
         UIAlertAction *WeiChartAction = [UIAlertAction actionWithTitle:@"支付宝支付" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             //取本地信息

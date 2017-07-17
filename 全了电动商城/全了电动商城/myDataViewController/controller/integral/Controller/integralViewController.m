@@ -93,6 +93,7 @@ static NSString *reuseIndentifier = @"cell";
     _tableView.dataSource = self;
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.backgroundColor = [UIColor whiteColor];
+    _tableView.tableFooterView = [UIView new];
     [_tableView registerNib:[UINib nibWithNibName:@"ChongZhiCell" bundle:nil] forCellReuseIdentifier:reuseIndentifier];
     [self.view addSubview:_tableView];
 }
@@ -105,6 +106,7 @@ static NSString *reuseIndentifier = @"cell";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChongZhiCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIndentifier forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     ChongZhiModel *model = self.dataModelArray[indexPath.row];
     cell.model = model;
     return cell;

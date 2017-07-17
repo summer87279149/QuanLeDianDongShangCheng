@@ -330,6 +330,12 @@
 
 //确认支付
 - (void)setPayBtn {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"全价购买请在支付完成后前往'我的=>直购记录'填写收货地址，夺宝购请等待开奖" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    [alertController addAction:okAction];
+    [self presentViewController:alertController animated:YES completion:nil];
     if (_payStatus == 1) {
         PayReq *request = [[PayReq alloc] init];
         request.partnerId = _partnerid;

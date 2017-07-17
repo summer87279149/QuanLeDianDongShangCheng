@@ -12,13 +12,13 @@
 #import <UMSocialCore/UMSocialCore.h>
 @implementation shareTopView
 
-/*
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-    // Drawing code
+    
 }
-*/
+
 
 - (IBAction)shareBtn:(UIButton *)sender {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -50,7 +50,7 @@
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     //设置文本
-    messageObject.text = @"社会化组件UShare将各大社交平台接入您的应用，快速武装App。";
+    messageObject.text = @"全了电动商城是一种很有意思的新型购物模式，1元就可能夺到价值2000多元的电动车，快来试试吧！";
     
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
@@ -64,18 +64,26 @@
 //分享图片
 - (void)shareImageToPlatformType:(UMSocialPlatformType)platformType
 {
+  
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
-    
+    messageObject.text = @"全了电动商城,1元就可能夺到价值2000多元的电动车，快来试试吧！";
     //创建图片内容对象
-    UMShareImageObject *shareObject = [[UMShareImageObject alloc] init];
+    
+    UMShareWebpageObject*webObject = [UMShareWebpageObject shareObjectWithTitle:@"全了电动商城,1元就可能夺到价值2000多元的电动车，快来试试吧！" descr:@"全了电动商城,1元就可能夺到价值2000多元的电动车，快来试试吧！" thumImage:[UIImage imageNamed:@"60.png"]];
+    webObject.webpageUrl = self.imgURL;
+//    UMShareImageObject *shareObject = [UMShareImageObject shareObjectWithTitle:@"全了电动商城" descr:@"全了电动商城是一种很有意思的新型购物模式，1元就可能夺到价值2000多元的电动车，快来试试吧！" thumImage:nil];
     //如果有缩略图，则设置缩略图
 //    shareObject.thumbImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imgURL]]];
-    
-    [shareObject setShareImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imgURL]]]];
+//    if (self.imgURL) {
+//         [shareObject setShareImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imgURL]]]];
+//    }else{
+//        self.imgURL = @"http://www.all-360.com/attachment/image/201705/qrcode_1494307726.png";
+//        [shareObject setShareImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.imgURL]]]];
+//    }
     
     //分享消息对象设置分享内容对象
-    messageObject.shareObject = shareObject;
+    messageObject.shareObject = webObject;
     
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {

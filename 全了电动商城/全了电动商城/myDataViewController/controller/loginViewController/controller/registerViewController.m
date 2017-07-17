@@ -30,11 +30,12 @@
     self.secondsCountDown = 60;
     [self setRegisterView];
 }
+
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
-#pragma mark ----- 创建导航栏
+#pragma mark- ----- 创建导航栏
 - (void)configNavigation {
     self.title = @"注册账户";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -52,7 +53,7 @@
 - (void) dealBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
-#pragma mark ----- setRegisterView
+#pragma mark - ---- setRegisterView
 - (void)setRegisterView {
     UIView *loginView = [[UIView alloc]initWithFrame:CGRectMake(0, 100,SCREEN_WIDTH , REGISTER_HEIGHT)];
     loginView.backgroundColor = [UIColor whiteColor];

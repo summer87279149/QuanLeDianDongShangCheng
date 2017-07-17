@@ -36,7 +36,7 @@ static NSString *Indentifier = @"TabelCell";
     [self setMyCollectionView];
     [self setTabelViewController];
     [QLRequest shareSuccess:^(id response) {
-        NSLog(@"%@",response);
+        NSLog(@"self.qrImgStr=%@",response);
         if ([response[@"code"]intValue]==95000) {
             self.qrImgStr = response[@"data"];
         }

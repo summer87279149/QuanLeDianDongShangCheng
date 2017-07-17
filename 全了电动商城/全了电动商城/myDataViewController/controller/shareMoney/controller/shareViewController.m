@@ -13,16 +13,16 @@
 #import "inviteExplain.h"
 #import "ExtractCash.h"
 #import "depositAccount.h"
-
 @interface shareViewController ()<UITableViewDelegate , UITableViewDataSource>
-
+{
+    UIImage *qrlImage;
+}
 @property (nonatomic , strong)UITableView *shareVC;
 @property (nonatomic , strong)shareTopView *topV;
 
 @end
 
 @implementation shareViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -30,6 +30,18 @@
     [self configNavigation];
     [self setTopView];
     [self setBottomView];
+    if (self.qrImgStr==nil) {
+        [QLRequest shareSuccess:^(id response) {
+            NSLog(@"self.qrImgStr=%@",response);
+            if ([response[@"code"]intValue]==95000) {
+                self.qrImgStr = response[@"data"];
+            }
+        } error:^(id response) {
+        }];
+    }
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     
 }
 - (void)viewWillAppear:(BOOL)animated {
@@ -37,9 +49,9 @@
     [self.navigationController setNavigationBarHidden:NO];
     self.tabBarController.tabBar.hidden = YES;
 }
+
 #pragma mark - 创建导航栏
 - (void)configNavigation {
-    
     self.title = @"分享赚钱";
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     backButton.frame = CGRectMake(0, 0, 15, 15);
@@ -52,9 +64,11 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [self.navigationController.navigationBar setTranslucent:NO];
 }
+
 - (void) dealBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (void)setTableView {
     self.shareVC.backgroundColor = [UIColor whiteColor];
     self.shareVC = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-60) style:UITableViewStyleGrouped];
@@ -63,14 +77,31 @@
     _shareVC.delegate = self;
     _shareVC.dataSource = self;
     [self.view addSubview:_shareVC];
-
+    [QLRequest shareTotalSuccess:^(id response) {
+//        NSLog(@"dasdsadas:%@",response);
+        if (response[@"data"]) {
+            NSDictionary *dic = response[@"data"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _topV.leftNum.text = [NSString stringWithFormat:@"%@",dic[@"total_yq"]];
+                _topV.leftMoney.text = [NSString stringWithFormat:@"钻石%@",dic[@"total_zeng"]];
+                _topV.rightNum.text = [NSString stringWithFormat:@"%@",dic[@"total_zs"]];
+                _topV.rightMoney.text = [NSString stringWithFormat:@"%@",dic[@"total_tx"]];
+            });
+        }
+    } error:^(id response) {
+    }];
 }
+
 - (void)setTopView {
+    
     _topV = [[NSBundle mainBundle] loadNibNamed:
              @"shareTopView" owner:nil options:nil ].lastObject;
     _topV.imgURL = self.qrImgStr;
     _topV.frame = CGRectMake(0, 0, SCREEN_WIDTH, 406);
+    
+    
 }
+
 - (void)setBottomView {
     UIView *bottomView = [[UIView alloc]init];
    // bottomView.frame = CGRectMake(0, SCREEN_HEIGHT - 60, SCREEN_WIDTH, 60);
